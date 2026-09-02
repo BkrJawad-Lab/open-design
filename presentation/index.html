@@ -1,0 +1,1151 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="dark">
+<title>صِلة دوائي · SILA IQ — خطة النمو التسويقية</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SILA IQ — Dark Teal / Glassmorphism Deck
+   Architecture inspired by Open Design "html-ppt":
+   .deck > .slide · runtime nav · counters · reveals
+   ============================================================ */
+:root{
+  --bg:#04141b; --bg2:#06222c;
+  --ink:#f0f9f7; --ink2:#b9d4d2; --ink3:#7fa0a1;
+  --teal:#2dd4bf; --cyan:#38bdf8; --mint:#5eead4; --indigo:#818cf8;
+  --amber:#fbbf24; --red:#fb7185;
+  --card:rgba(255,255,255,.055);
+  --card2:rgba(255,255,255,.10);
+  --line:rgba(255,255,255,.13);
+  --line-teal:rgba(45,212,191,.4);
+  --grad:linear-gradient(120deg,#2dd4bf 0%,#38bdf8 55%,#818cf8 100%);
+  --r:18px; --r-sm:12px;
+  --sh:0 18px 50px rgba(0,0,0,.35);
+  --fd:'Cairo',sans-serif;
+  --fb:'Tajawal',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{
+  font-family:var(--fb); color:var(--ink); background:var(--bg);
+  overflow:hidden; -webkit-font-smoothing:antialiased;
+}
+::selection{background:rgba(45,212,191,.35)}
+
+/* ---------- ambient background ---------- */
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(52% 44% at 82% 8%, rgba(45,212,191,.16), transparent 62%),
+    radial-gradient(46% 42% at 12% 18%, rgba(56,189,248,.14), transparent 60%),
+    radial-gradient(60% 52% at 55% 108%, rgba(129,140,248,.12), transparent 60%),
+    linear-gradient(180deg,#051a22 0%, #04141b 55%, #031018 100%);
+}
+.bgfx::after{ /* faint grid */
+  content:"";position:absolute;inset:0;opacity:.5;
+  background:
+    linear-gradient(rgba(255,255,255,.028) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(255,255,255,.028) 1px, transparent 1px);
+  background-size:56px 56px;
+  mask-image:radial-gradient(70% 70% at 50% 40%, #000 30%, transparent 100%);
+  -webkit-mask-image:radial-gradient(70% 70% at 50% 40%, #000 30%, transparent 100%);
+}
+.orb{position:fixed;z-index:0;border-radius:50%;filter:blur(90px);opacity:.5;pointer-events:none}
+.orb.o1{width:420px;height:420px;left:-140px;bottom:-160px;background:radial-gradient(circle,rgba(45,212,191,.34),transparent 65%);animation:drift 16s ease-in-out infinite alternate}
+.orb.o2{width:380px;height:380px;right:-120px;top:-140px;background:radial-gradient(circle,rgba(56,189,248,.30),transparent 65%);animation:drift 20s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(46px,-38px) scale(1.12)}}
+
+/* ---------- deck & slides ---------- */
+.deck{position:fixed;inset:0;z-index:1}
+.slide{
+  position:absolute;inset:0;display:flex;flex-direction:column;
+  padding:clamp(20px,3.6vh,46px) clamp(22px,4.6vw,76px) clamp(64px,8.5vh,92px);
+  opacity:0;visibility:hidden;transform:translateX(-44px) scale(.99);
+  transition:opacity .55s ease, transform .6s cubic-bezier(.22,.61,.36,1), visibility 0s linear .55s;
+  overflow:hidden;
+}
+.slide.is-active{opacity:1;visibility:visible;transform:none;transition-delay:0s;z-index:2}
+.frame{width:100%;max-width:1560px;margin-inline:auto;flex:1;display:flex;flex-direction:column;min-height:0}
+
+/* reveal-on-active */
+.rv{opacity:0;transform:translateY(16px);transition:opacity .6s ease, transform .65s cubic-bezier(.22,.61,.36,1)}
+.slide.is-active .rv{opacity:1;transform:none;transition-delay:calc(var(--d,0)*90ms + 120ms)}
+
+/* ---------- type ---------- */
+.num-tag{font-family:var(--fd);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--teal);display:flex;align-items:center;gap:10px}
+.num-tag::before{content:"";width:34px;height:2px;background:var(--grad);border-radius:2px}
+.h2{font-family:var(--fd);font-weight:800;font-size:clamp(26px,3.3vw,48px);line-height:1.28;margin-top:10px;letter-spacing:-.01em}
+.lede{color:var(--ink2);font-size:clamp(14px,1.35vw,18px);line-height:1.9;max-width:980px;margin-top:12px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hl{color:var(--mint)}
+.kicker{font-family:var(--fd);font-weight:700;font-size:clamp(13px,1.2vw,16px);letter-spacing:.08em;color:var(--ink3)}
+.s-head{flex:0 0 auto;margin-bottom:clamp(14px,2.6vh,30px)}
+
+/* ---------- slide footer ---------- */
+.s-foot{position:absolute;inset-inline:0;bottom:clamp(14px,2.6vh,28px);
+  padding:0 clamp(22px,4.6vw,76px);display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--ink3);z-index:3}
+.s-foot .brandline{display:flex;align-items:center;gap:8px;font-family:var(--fd);font-weight:700;letter-spacing:.02em}
+.s-foot .brandline svg{width:18px;height:18px}
+.pageno{font-family:var(--fd);font-weight:700;font-size:12px}
+.pageno b{color:var(--ink);font-size:14px}
+.pageno i{font-style:normal;color:var(--ink3)}
+
+/* ---------- glass cards ---------- */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);
+  backdrop-filter:blur(22px) saturate(160%);-webkit-backdrop-filter:blur(22px) saturate(160%);
+  box-shadow:var(--sh);position:relative}
+.card.glow{border-color:var(--line-teal)}
+.card.hover{transition:transform .3s ease, border-color .3s ease, background .3s ease}
+.card.hover:hover{transform:translateY(-4px);border-color:var(--line-teal);background:var(--card2)}
+.card h4{font-family:var(--fd);font-weight:800;font-size:clamp(14px,1.25vw,18px);display:flex;align-items:center;gap:10px}
+.card p{color:var(--ink2);font-size:clamp(12px,1.05vw,14.5px);line-height:1.85}
+.card .ico{width:38px;height:38px;flex:0 0 38px;border-radius:12px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(45,212,191,.18),rgba(56,189,248,.14));border:1px solid var(--line-teal);color:var(--mint)}
+.card .ico svg{width:20px;height:20px}
+.pad{padding:clamp(14px,1.5vw,22px)}
+.dim{color:var(--ink3)}
+.mt-s{margin-top:10px}.mt-m{margin-top:16px}.mt-l{margin-top:24px}
+
+/* ---------- grids ---------- */
+.grid{display:grid;gap:clamp(10px,1.1vw,16px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.g21{grid-template-columns:1.15fr .85fr}
+.g12{grid-template-columns:.85fr 1.15fr}
+
+/* ---------- chips / pills ---------- */
+.chip{display:inline-flex;align-items:center;gap:8px;padding:8px 14px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);font-size:clamp(11px,1vw,13.5px);color:var(--ink2);
+  backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px)}
+.chip b{color:var(--ink);font-weight:700}
+.chip.teal{border-color:var(--line-teal);background:rgba(45,212,191,.10);color:var(--mint)}
+.chip svg{width:15px;height:15px}
+.pillrow{display:flex;flex-wrap:wrap;gap:10px}
+
+/* ---------- metric cards ---------- */
+.mcard{padding:clamp(12px,1.3vw,20px);display:flex;flex-direction:column;gap:6px;min-height:118px;justify-content:center}
+.mcard .n{font-family:var(--fd);font-weight:900;font-size:clamp(30px,3.1vw,52px);line-height:1.1;
+  background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent;display:flex;align-items:baseline;gap:4px}
+.mcard .n .pre,.mcard .n .suf{font-size:.55em;font-weight:800}
+.mcard .l{color:var(--ink2);font-size:clamp(11px,.98vw,14px);line-height:1.7}
+.mcard .t{font-family:var(--fd);font-weight:700;font-size:12px;color:var(--ink3);letter-spacing:.04em}
+.mcard.good .n{background:linear-gradient(120deg,#5eead4,#34d399);-webkit-background-clip:text;background-clip:text}
+.mcard.warn .n{background:linear-gradient(120deg,#fbbf24,#fb923c);-webkit-background-clip:text;background-clip:text}
+
+/* ---------- banners ---------- */
+.banner{display:flex;align-items:center;gap:16px;padding:clamp(14px,1.6vh,20px) clamp(16px,1.6vw,24px);
+  border-radius:var(--r);border:1px solid var(--line-teal);
+  background:linear-gradient(120deg,rgba(45,212,191,.12),rgba(56,189,248,.08) 60%,rgba(129,140,248,.08));
+  backdrop-filter:blur(18px);-webkit-backdrop-filter:blur(18px)}
+.banner .q{font-family:var(--fd);font-weight:800;font-size:clamp(16px,1.7vw,24px);line-height:1.7}
+.banner.warnb{border-color:rgba(251,191,36,.4);
+  background:linear-gradient(120deg,rgba(251,191,36,.14),rgba(251,113,133,.08))}
+.banner .b-ico{width:44px;height:44px;flex:0 0 44px;border-radius:14px;display:grid;place-items:center;
+  background:rgba(45,212,191,.16);border:1px solid var(--line-teal);color:var(--mint)}
+.banner.warnb .b-ico{background:rgba(251,191,36,.15);border-color:rgba(251,191,36,.4);color:var(--amber)}
+.banner .b-ico svg{width:22px;height:22px}
+
+/* ---------- journey (slide 2) ---------- */
+.journey{display:grid;grid-template-columns:repeat(5,1fr);gap:10px}
+.jstep{padding:clamp(12px,1.2vw,18px);text-align:center;position:relative}
+.jstep .jn{width:34px;height:34px;margin:0 auto 10px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--fd);font-weight:800;font-size:14px;color:#0b1116;
+  background:linear-gradient(135deg,var(--teal),var(--cyan))}
+.jstep h5{font-family:var(--fd);font-weight:800;font-size:clamp(12px,1.05vw,15px);line-height:1.5}
+.jstep p{font-size:clamp(10.5px,.92vw,13px);color:var(--ink3);line-height:1.7;margin-top:4px}
+.jstep::after{content:"";position:absolute;left:-11px;top:50%;width:12px;height:2px;background:var(--line-teal)}
+.jstep:last-child::after{display:none}
+
+/* ---------- triangle (slide 3) ---------- */
+.tri{position:relative;width:100%;max-width:980px;margin:0 auto;aspect-ratio:1000/560}
+.tri svg.lines{position:absolute;inset:0;width:100%;height:100%}
+.flow{fill:none;stroke-width:2;stroke-dasharray:9 13;opacity:.75}
+.flow.f1{stroke:var(--teal)} .flow.f2{stroke:var(--cyan)} .flow.f3{stroke:var(--indigo)}
+.flow{animation:dashmove 1.4s linear infinite}
+@keyframes dashmove{to{stroke-dashoffset:-44}}
+.edgelabel{fill:var(--ink3);font-family:var(--fb);font-size:19px;font-weight:500}
+.edgelabel tspan{fill:var(--ink2);font-weight:700}
+.tri-node{position:absolute;width:250px;transform:translate(-50%,-50%);text-align:center}
+.tri-node .tn-card{padding:clamp(12px,1.2vw,18px)}
+.tri-node .tn-ico{width:52px;height:52px;margin:0 auto 8px;border-radius:16px;display:grid;place-items:center;
+  background:linear-gradient(135deg,rgba(45,212,191,.22),rgba(56,189,248,.16));border:1px solid var(--line-teal);color:var(--mint)}
+.tri-node .tn-ico svg{width:26px;height:26px}
+.tri-node h4{font-family:var(--fd);font-weight:800;font-size:clamp(14px,1.25vw,18px)}
+.tri-node .tn-sub{font-size:11.5px;color:var(--ink3);font-weight:700;letter-spacing:.05em;margin-top:1px}
+.tri-node ul{list-style:none;margin-top:9px;display:flex;flex-direction:column;gap:4px}
+.tri-node li{font-size:clamp(10.5px,.95vw,13px);color:var(--ink2);display:flex;align-items:center;gap:6px}
+.tri-node li::before{content:"";width:5px;height:5px;border-radius:50%;background:var(--teal);flex:0 0 5px}
+.tri-node.n-top{top:13%;left:50%}
+.tri-node.n-br{bottom:9%;left:81.5%}
+.tri-node.n-bl{bottom:9%;left:18.5%}
+.tri-core{position:absolute;top:53%;left:50%;transform:translate(-50%,-50%);width:212px;text-align:center}
+.tri-core .core-card{padding:16px 14px;border-radius:50%;width:158px;height:158px;margin:0 auto;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;gap:6px;
+  background:radial-gradient(circle at 30% 25%,rgba(45,212,191,.30),rgba(6,34,44,.9) 70%);
+  border:1px solid var(--line-teal);box-shadow:0 0 60px rgba(45,212,191,.28), inset 0 1px 0 rgba(255,255,255,.15)}
+.tri-core h4{font-family:var(--fd);font-weight:800;font-size:14.5px;line-height:1.5}
+.tri-core .core-sub{font-size:10.5px;color:var(--ink3);font-weight:700}
+.tri-core .core-chips{display:flex;flex-wrap:wrap;gap:5px;justify-content:center;margin-top:2px;max-width:210px}
+.tri-core .core-chips span{font-size:10px;padding:3px 9px;border-radius:999px;border:1px solid var(--line);background:rgba(255,255,255,.05);color:var(--ink2)}
+
+/* flow steps strip */
+.steps{display:flex;align-items:center;justify-content:center;gap:8px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:8px;padding:9px 16px;border-radius:999px;
+  background:var(--card);border:1px solid var(--line);font-family:var(--fd);font-weight:700;font-size:clamp(11px,1vw,14px)}
+.step .sn{width:22px;height:22px;border-radius:50%;display:grid;place-items:center;font-size:11px;color:#0b1116;background:linear-gradient(135deg,var(--teal),var(--cyan))}
+.arrow{color:var(--ink3);display:flex}
+.arrow svg{width:16px;height:16px;transform:scaleX(-1)}
+
+/* ---------- matrix (slide 6) ---------- */
+.matrix{display:grid;grid-template-columns:1.35fr 1fr 1fr 1fr 1.15fr;gap:8px}
+.mx-h{font-family:var(--fd);font-weight:800;font-size:clamp(11.5px,1vw,14.5px);padding:12px 10px;text-align:center;
+  border-radius:var(--r-sm);background:var(--card);border:1px solid var(--line);line-height:1.5}
+.mx-h small{display:block;font-family:var(--fb);font-weight:500;font-size:10.5px;color:var(--ink3);margin-top:2px}
+.mx-h.us{background:linear-gradient(135deg,rgba(45,212,191,.18),rgba(56,189,248,.12));border-color:var(--line-teal)}
+.mx-r{font-family:var(--fd);font-weight:700;font-size:clamp(11.5px,.98vw,14px);display:flex;align-items:center;
+  padding:10px 12px;border-radius:var(--r-sm);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06)}
+.mx-c{display:grid;place-items:center;padding:8px;border-radius:var(--r-sm);background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);font-size:16px}
+.mx-c.us{background:linear-gradient(135deg,rgba(45,212,191,.14),rgba(56,189,248,.08));border-color:var(--line-teal)}
+.mx-c .v{width:26px;height:26px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:13px}
+.mx-c .v.yes{background:rgba(94,234,212,.16);color:var(--mint);border:1px solid rgba(94,234,212,.4)}
+.mx-c .v.mid{background:rgba(251,191,36,.13);color:var(--amber);border:1px solid rgba(251,191,36,.35)}
+.mx-c .v.no{background:rgba(255,255,255,.05);color:var(--ink3);border:1px solid rgba(255,255,255,.12);font-size:11px}
+.legend{display:flex;gap:14px;font-size:11.5px;color:var(--ink3);align-items:center}
+.legend .v{width:20px;height:20px;border-radius:50%;display:inline-grid;place-items:center;font-size:10px;font-weight:800;vertical-align:middle;margin-inline-end:5px}
+
+/* ---------- timeline (slide 8) ---------- */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;position:relative}
+.phase{padding:clamp(12px,1.3vw,18px)}
+.phase .ph-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.phase .ph-n{font-family:var(--fd);font-weight:900;font-size:13px;color:#0b1116;background:linear-gradient(135deg,var(--teal),var(--cyan));
+  padding:4px 10px;border-radius:8px}
+.phase .ph-w{font-size:11px;color:var(--ink3);font-weight:700}
+.phase h4{margin-top:10px;font-size:clamp(13.5px,1.15vw,17px)}
+.phase ul{list-style:none;margin-top:8px;display:flex;flex-direction:column;gap:6px}
+.phase li{font-size:clamp(10.5px,.95vw,13px);color:var(--ink2);line-height:1.7;display:flex;gap:7px}
+.phase li::before{content:"";width:5px;height:5px;border-radius:2px;background:var(--teal);margin-top:8px;flex:0 0 5px}
+
+/* ---------- engine steps (slide 9) ---------- */
+.ministeps{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ministeps li{display:flex;gap:12px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-sm);
+  background:rgba(255,255,255,.035);border:1px solid rgba(255,255,255,.07)}
+.ministeps .mn{width:26px;height:26px;flex:0 0 26px;border-radius:9px;display:grid;place-items:center;
+  font-family:var(--fd);font-weight:800;font-size:12px;color:#0b1116;background:linear-gradient(135deg,var(--teal),var(--cyan))}
+.ministeps b{font-family:var(--fd);font-size:clamp(12px,1.05vw,15px)}
+.ministeps span{display:block;font-size:clamp(10.5px,.95vw,13px);color:var(--ink3);line-height:1.7;margin-top:1px}
+
+/* ---------- funnel (slide 11) ---------- */
+.funnel{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.fstep{display:flex;align-items:center;gap:6px;padding:7px 12px;border-radius:10px;font-size:clamp(10.5px,.95vw,13px);font-weight:700;
+  font-family:var(--fd);background:var(--card);border:1px solid var(--line);color:var(--ink2)}
+.fstep .fi{font-size:10px;color:var(--ink3);font-weight:800}
+.fstep.hot{background:linear-gradient(135deg,rgba(45,212,191,.2),rgba(56,189,248,.12));border-color:var(--line-teal);color:var(--mint)}
+.farr{color:var(--ink3);display:flex}
+.farr svg{width:13px;height:13px;transform:scaleX(-1)}
+.eq{font-family:ui-monospace,'SFMono-Regular',Menlo,monospace;font-size:clamp(10.5px,.95vw,13px);color:var(--ink2);
+  background:rgba(3,16,24,.7);border:1px solid var(--line);border-radius:10px;padding:10px 14px;direction:ltr;text-align:left;
+  display:inline-block;line-height:2}
+
+/* ---------- decisions (slide 12) ---------- */
+.decisions{display:grid;grid-template-columns:repeat(2,1fr);gap:12px}
+.dec{display:flex;gap:14px;align-items:flex-start;padding:clamp(12px,1.3vw,18px)}
+.dec .dn{width:38px;height:38px;flex:0 0 38px;border-radius:12px;display:grid;place-items:center;
+  font-family:var(--fd);font-weight:900;font-size:16px;color:#0b1116;background:linear-gradient(135deg,var(--teal),var(--cyan))}
+.dec b{font-family:var(--fd);font-size:clamp(13px,1.15vw,16.5px);display:block}
+.dec span{font-size:clamp(11px,1vw,13.5px);color:var(--ink3);line-height:1.75;display:block;margin-top:2px}
+
+/* ---------- cover ---------- */
+#s1{justify-content:center;align-items:center;text-align:center;padding-inline:clamp(22px,6vw,90px)}
+.cover-logo{display:flex;align-items:center;gap:14px;position:absolute;top:clamp(20px,4vh,44px);inset-inline-start:clamp(22px,4.6vw,76px)}
+.cover-logo svg{width:44px;height:44px;filter:drop-shadow(0 6px 18px rgba(45,212,191,.35))}
+.cover-logo .cl-t{font-family:var(--fd);font-weight:800;font-size:17px;line-height:1.3}
+.cover-logo .cl-t small{display:block;font-family:var(--fb);font-weight:500;font-size:10.5px;color:var(--ink3);letter-spacing:.28em}
+.cover-kicker{display:inline-flex;align-items:center;gap:10px;padding:9px 18px;border-radius:999px;
+  border:1px solid var(--line-teal);background:rgba(45,212,191,.08);font-family:var(--fd);font-weight:700;
+  font-size:clamp(12px,1.15vw,15px);color:var(--mint)}
+.cover-kicker .dot{width:7px;height:7px;border-radius:50%;background:var(--teal);box-shadow:0 0 10px var(--teal);animation:blink 2s ease infinite}
+@keyframes blink{50%{opacity:.35}}
+.h1{font-family:var(--fd);font-weight:900;font-size:clamp(34px,5.4vw,76px);line-height:1.35;letter-spacing:-.015em;margin-top:22px}
+.cover-quote{max-width:820px;margin:26px auto 0;padding:18px 28px;border-radius:var(--r);
+  border:1px solid var(--line-teal);background:linear-gradient(120deg,rgba(45,212,191,.10),rgba(56,189,248,.06));
+  backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px)}
+.cover-quote p{font-family:var(--fd);font-weight:800;font-size:clamp(16px,1.8vw,24px);line-height:1.9}
+.cover-meta{display:flex;flex-wrap:wrap;gap:10px;justify-content:center;margin-top:26px}
+.ecg-wrap{position:absolute;bottom:clamp(52px,8vh,84px);inset-inline:clamp(22px,4.6vw,76px);height:64px;pointer-events:none}
+.ecg{width:100%;height:100%;overflow:visible}
+.ecg path{fill:none;stroke:url(#ecggrad);stroke-width:2.5;stroke-linecap:round;stroke-linejoin:round;
+  stroke-dasharray:1400;stroke-dashoffset:1400;animation:ecgdraw 4.6s cubic-bezier(.4,0,.2,1) infinite;
+  filter:drop-shadow(0 0 8px rgba(45,212,191,.7))}
+@keyframes ecgdraw{0%{stroke-dashoffset:1400;opacity:0}8%{opacity:1}55%{stroke-dashoffset:0;opacity:1}82%{opacity:1;stroke-dashoffset:0}100%{stroke-dashoffset:0;opacity:0}}
+
+/* ---------- chrome: progress / rail / nav ---------- */
+.progress{position:fixed;top:0;inset-inline:0;height:3px;z-index:40;background:rgba(255,255,255,.08)}
+.progress i{display:block;height:100%;width:0;background:var(--grad);box-shadow:0 0 14px rgba(45,212,191,.9);
+  border-radius:0 0 3px 3px;transition:width .55s cubic-bezier(.22,.61,.36,1)}
+.rail{position:fixed;top:50%;transform:translateY(-50%);left:14px;z-index:40;display:flex;flex-direction:column;gap:9px}
+.rail button{width:9px;height:9px;border-radius:99px;border:none;cursor:pointer;background:rgba(255,255,255,.18);
+  transition:all .35s ease;padding:0}
+.rail button.on{height:26px;background:var(--grad);box-shadow:0 0 10px rgba(45,212,191,.7)}
+.rail button:hover{background:rgba(255,255,255,.45)}
+.nav{position:fixed;bottom:clamp(14px,2.6vh,26px);left:50%;transform:translateX(-50%);z-index:40;
+  display:flex;align-items:center;gap:8px;padding:8px 10px;border-radius:999px;
+  background:rgba(6,26,34,.72);border:1px solid var(--line);backdrop-filter:blur(20px) saturate(150%);
+  -webkit-backdrop-filter:blur(20px) saturate(150%);box-shadow:var(--sh)}
+.nbtn{display:flex;align-items:center;gap:7px;height:40px;padding:0 14px;border-radius:999px;border:1px solid transparent;
+  background:transparent;color:var(--ink2);font-family:var(--fd);font-weight:700;font-size:12.5px;cursor:pointer;transition:all .25s ease}
+.nbtn svg{width:17px;height:17px}
+.nbtn:hover{background:var(--card2);color:var(--ink);border-color:var(--line)}
+.nbtn.primary{background:linear-gradient(135deg,rgba(45,212,191,.22),rgba(56,189,248,.16));border-color:var(--line-teal);color:var(--mint)}
+.nbtn.iconic{width:40px;height:40px;padding:0;justify-content:center}
+.nav .sep{width:1px;height:22px;background:var(--line)}
+.hint{position:fixed;bottom:clamp(14px,2.6vh,26px);right:clamp(14px,2vw,28px);z-index:40;
+  font-size:11px;color:var(--ink3);background:rgba(6,26,34,.6);border:1px solid var(--line);
+  padding:7px 12px;border-radius:10px;backdrop-filter:blur(12px);transition:opacity .3s}
+.hint kbd{font-family:ui-monospace,monospace;background:rgba(255,255,255,.08);border:1px solid var(--line);
+  border-radius:5px;padding:1px 6px;font-size:10px;color:var(--ink2)}
+.hint.hide{opacity:0;pointer-events:none}
+
+/* ---------- overview ---------- */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(2,10,14,.88);backdrop-filter:blur(20px);
+  -webkit-backdrop-filter:blur(20px);display:none;flex-direction:column;padding:clamp(18px,3vh,36px) clamp(18px,4vw,60px)}
+.ov.open{display:flex}
+.ov-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.ov-head h3{font-family:var(--fd);font-weight:800;font-size:20px}
+.ov-head p{color:var(--ink3);font-size:12.5px;margin-top:3px}
+.ov-close{width:42px;height:42px;border-radius:12px;border:1px solid var(--line);background:var(--card);
+  color:var(--ink);cursor:pointer;display:grid;place-items:center}
+.ov-close svg{width:18px;height:18px}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(270px,1fr));gap:16px;overflow:auto;padding-bottom:20px}
+.ov-item{cursor:pointer;outline:none}
+.ov-item .ov-thumb{position:relative;aspect-ratio:16/9;border-radius:14px;overflow:hidden;
+  border:1px solid var(--line);background:var(--bg2);transition:all .3s ease}
+.ov-item:hover .ov-thumb{transform:translateY(-4px);border-color:var(--line-teal);box-shadow:0 14px 40px rgba(0,0,0,.5)}
+.ov-item.on .ov-thumb{border-color:var(--teal);box-shadow:0 0 0 2px rgba(45,212,191,.5),0 14px 40px rgba(0,0,0,.5)}
+.ov-src{position:absolute;top:0;right:0;width:1200px;height:675px;transform-origin:top right;pointer-events:none}
+.ov-src .slide{position:absolute;inset:0;opacity:1;visibility:visible;transform:none;padding:18px 26px 40px}
+.ov-cap{display:flex;align-items:center;gap:9px;margin-top:9px;font-family:var(--fd);font-weight:700;font-size:13px;color:var(--ink2)}
+.ov-cap .ov-n{width:24px;height:24px;flex:0 0 24px;border-radius:8px;display:grid;place-items:center;font-size:11px;
+  font-weight:800;background:var(--card2);border:1px solid var(--line);color:var(--ink3)}
+.ov-item.on .ov-cap{color:var(--mint)}
+.ov-item.on .ov-n{background:linear-gradient(135deg,var(--teal),var(--cyan));color:#0b1116;border-color:transparent}
+
+/* ---------- misc ---------- */
+.quote-card{padding:clamp(14px,1.5vw,22px)}
+.quote-card p{font-family:var(--fd);font-weight:700;font-size:clamp(13px,1.2vw,17px);line-height:2;color:var(--ink)}
+.quote-card .qt{font-size:11px;color:var(--ink3);font-weight:700;margin-top:6px}
+.tone-strip{display:flex;flex-wrap:wrap;gap:8px;align-items:center}
+.tone-strip .bad{padding:7px 13px;border-radius:999px;border:1px solid rgba(251,113,133,.4);background:rgba(251,113,133,.09);
+  color:#fda4af;font-size:clamp(11px,1vw,13.5px);font-weight:700;text-decoration:line-through;text-decoration-thickness:2px}
+
+@media (max-width:900px){
+  .g5,.g4{grid-template-columns:repeat(2,1fr)}
+  .g3,.g2{grid-template-columns:1fr}
+  .g21,.g12{grid-template-columns:1fr}
+  .journey{grid-template-columns:repeat(2,1fr)}
+  .jstep::after{display:none}
+  .matrix{grid-template-columns:1.2fr 1fr 1fr 1fr 1.05fr;font-size:11px}
+  .tl{grid-template-columns:repeat(2,1fr)}
+  .decisions{grid-template-columns:1fr}
+  .tri{max-width:640px}
+  .rail{display:none}
+  .hint{display:none}
+}
+@media (max-height:640px) and (min-width:901px){
+  .slide{overflow:auto}
+}
+@media (prefers-reduced-motion:reduce){
+  *,*::before,*::after{animation:none !important;transition:none !important}
+  .rv{opacity:1;transform:none}
+}
+
+/* ---------- print / PDF (A4 landscape) ---------- */
+@media print{
+  @page{size:A4 landscape;margin:0}
+  html,body{height:auto;overflow:visible;background:#04141b}
+  *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .bgfx,.orb,.progress,.rail,.nav,.hint,.ov{display:none !important}
+  .deck{position:static}
+  .slide{position:relative !important;inset:auto !important;display:flex !important;opacity:1 !important;
+    visibility:visible !important;transform:none !important;overflow:hidden;
+    width:297mm;height:208mm;page-break-after:always;break-after:page;
+    padding:11mm 13mm 14mm;
+    background:
+      radial-gradient(52% 44% at 82% 8%, rgba(45,212,191,.16), transparent 62%),
+      radial-gradient(46% 42% at 12% 18%, rgba(56,189,248,.14), transparent 60%),
+      radial-gradient(60% 52% at 55% 108%, rgba(129,140,248,.12), transparent 60%),
+      linear-gradient(180deg,#051a22 0%, #04141b 55%, #031018 100%) !important}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .rv{opacity:1 !important;transform:none !important;transition:none !important}
+  .s-foot{bottom:5mm}
+  .card,.banner,.chip,.step,.mcard,.dec,.jstep,.phase,.ministeps li,.mx-r,.mx-c,.fstep,.ov-thumb{box-shadow:none !important}
+  .ecg path{stroke-dasharray:none;stroke-dashoffset:0;opacity:1;animation:none}
+}
+</style>
+</head>
+<body>
+
+<!-- shared svg defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2dd4bf"/><stop offset=".6" stop-color="#38bdf8"/><stop offset="1" stop-color="#818cf8"/>
+    </linearGradient>
+    <linearGradient id="ecggrad" x1="0" y1="0" x2="1" y2="0">
+      <stop offset="0" stop-color="#2dd4bf"/><stop offset="1" stop-color="#38bdf8"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="bgfx" aria-hidden="true"></div>
+<div class="orb o1" aria-hidden="true"></div>
+<div class="orb o2" aria-hidden="true"></div>
+
+<div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+
+<main class="deck" id="deck">
+
+<!-- ═══════════ 1 · الغلاف ═══════════ -->
+<section class="slide is-active" id="s1" data-title="الغلاف">
+  <div class="cover-logo rv" style="--d:0">
+    <svg viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="13" fill="url(#lg)"/><path d="M24 13v22M13 24h22" stroke="#04141b" stroke-width="6" stroke-linecap="round"/><path d="M11 33h7l3-6 4 9 3-6h9" stroke="#fff" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg>
+    <div class="cl-t">صِلة دوائي<small>S I L A · I Q</small></div>
+  </div>
+
+  <span class="cover-kicker rv" style="--d:1"><span class="dot"></span> الخطة التسويقية والاستراتيجية للنمو · السوق العراقي</span>
+
+  <h1 class="h1 rv" style="--d:2">من تطبيق توصيل<br>إلى <span class="grad-text">شبكة دواء موثوقة</span></h1>
+
+  <div class="cover-quote rv" style="--d:3">
+    <p>«دواؤك الموثوق، من صيدلية قريبة،<br>وبالسعر والوقت الواضحين.»</p>
+  </div>
+
+  <div class="cover-meta rv" style="--d:4">
+    <span class="chip teal"><b>قرار إطلاق 90 يوماً</b></span>
+    <span class="chip">بغداد أولاً → البصرة / النجف / كربلاء</span>
+    <span class="chip">2 أيلول 2026</span>
+    <span class="chip">12 شريحة</span>
+  </div>
+
+  <div class="ecg-wrap" aria-hidden="true">
+    <svg class="ecg" viewBox="0 0 1200 64" preserveAspectRatio="none">
+      <path d="M0,34 L280,34 L300,34 L312,12 L326,52 L340,34 L560,34 L580,34 L592,10 L606,54 L620,34 L840,34 L860,34 L872,14 L886,50 L900,34 L1200,34"/>
+    </svg>
+  </div>
+
+  <footer class="s-foot">
+    <span class="brandline"><svg viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="13" fill="url(#lg)"/><path d="M24 13v22M13 24h22" stroke="#04141b" stroke-width="6" stroke-linecap="round"/></svg> صِلة دوائي · SILA IQ</span>
+    <span class="pageno"><b>01</b> <i>/ 12</i></span>
+  </footer>
+</section>
+
+<!-- ═══════════ 2 · الفرصة والمشكلة ═══════════ -->
+<section class="slide" id="s2" data-title="الفرصة والمشكلة">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">01 — الفرصة</p>
+      <h2 class="h2">رحلة المريض اليوم <span class="grad-text">مشتّتة… وقابلة للامتلاك</span></h2>
+      <p class="lede">اكتشاف الدواء يبدأ بالهاتف ووسائل التواصل، والإتمام بالنقد عند الاستلام — بينما الثقة والتنسيق لم يكتملا بعد.</p>
+    </header>
+
+    <div class="journey rv" style="--d:1">
+      <div class="card jstep"><div class="jn">1</div><h5>اتصال وانتظار</h5><p>محاولات أرقام متفرقة، أحياناً بلا رد</p></div>
+      <div class="card jstep"><div class="jn">2</div><h5>مشاوير متعددة</h5><p>جولات بين الصيدليات بحثاً عن المتوفر</p></div>
+      <div class="card jstep"><div class="jn">3</div><h5>«مو متوفر»</h5><p>لا مخزون مضمون ولا بديل واضح</p></div>
+      <div class="card jstep"><div class="jn">4</div><h5>نقد عند الاستلام</h5><p>سعر نهائي ووقت وصول غير واضحين مسبقاً</p></div>
+      <div class="card jstep"><div class="jn">5</div><h5>قلق من المصدر</h5><p>لا رؤية لمرخّص الصيدلية أو سلسلة الحفظ</p></div>
+    </div>
+
+    <div class="grid g3 mt-l rv" style="--d:2">
+      <div class="card glow pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12.55a11 11 0 0 1 14 0M8.5 15.5a6 6 0 0 1 7 0M12 19h.01"/></svg></span> كثافة رقمية</h4>
+        <p class="mt-s">العراق ضمن أسواق رقمية كثيفة، والاكتشاف ينطلق من فيسبوك وإنستغرام وتيك توك.</p>
+      </div>
+      <div class="card glow pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="6" width="18" height="13" rx="2.5"/><path d="M3 10h18M7 15h4"/></svg></span> النقد مرساة الثقة</h4>
+        <p class="mt-s">COD ما زال مهماً — السعر النهائي وأجرة التوصيل ووقت الوصول يجب أن يظهر قبل التأكيد.</p>
+      </div>
+      <div class="card glow pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></span> فجوات غير مكتملة</h4>
+        <p class="mt-s">التوفّر والتنسيق والثقة ما زالت فجوات مفتوحة — لا حاجة لاختراع سوق، بل لإغلاق فجوة.</p>
+      </div>
+    </div>
+
+    <div class="banner warnb mt-l rv" style="--d:3">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5h.01"/></svg></span>
+      <p style="font-size:clamp(12.5px,1.15vw,15.5px);color:var(--ink2);line-height:1.9">الدواء <b style="color:var(--ink)">فئة عالية الحساسية</b>: إثبات الترخيص والتحقق من الوصفة وسلسلة حفظ واضحة ورفض الطلبات غير الآمنة — شروط دخول قبل أي إعلان أداء.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>02</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 3 · ما هي صِلة؟ ═══════════ -->
+<section class="slide" id="s3" data-title="ما هي صِلة؟">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">02 — المنصة</p>
+      <h2 class="h2">نظام واحد يربط <span class="grad-text">المريض والصيدلية والكابتن</span></h2>
+    </header>
+
+    <div class="tri rv" style="--d:1">
+      <svg class="lines" viewBox="0 0 1000 560" aria-hidden="true">
+        <path class="flow f1" d="M560,110 C700,180 790,290 818,388"/>
+        <path class="flow f2" d="M756,470 C620,522 380,522 244,470"/>
+        <path class="flow f3" d="M182,388 C210,290 300,180 440,110"/>
+        <circle r="5" fill="#2dd4bf"><animateMotion dur="4.5s" repeatCount="indefinite" path="M560,110 C700,180 790,290 818,388"/></circle>
+        <circle r="5" fill="#38bdf8"><animateMotion dur="4.5s" begin="1.5s" repeatCount="indefinite" path="M756,470 C620,522 380,522 244,470"/></circle>
+        <circle r="5" fill="#818cf8"><animateMotion dur="4.5s" begin="3s" repeatCount="indefinite" path="M182,388 C210,290 300,180 440,110"/></circle>
+        <text class="edgelabel" x="742" y="240" text-anchor="middle">طلب · <tspan>وصفة</tspan></text>
+        <text class="edgelabel" x="500" y="512" text-anchor="middle">تجهيز · <tspan>تسليم</tspan></text>
+        <text class="edgelabel" x="258" y="240" text-anchor="middle">توصيل · <tspan>COD</tspan></text>
+      </svg>
+
+      <div class="tri-node n-top">
+        <div class="card tn-card glow">
+          <div class="tn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.4"/><path d="M5.5 20c.8-3.6 3.4-5.5 6.5-5.5s5.7 1.9 6.5 5.5"/></svg></div>
+          <h4>المريض / العائلة</h4><p class="tn-sub">B2C</p>
+          <ul><li>بحث ورفع وصفة</li><li>مقارنة عروض الصيدليات</li><li>تتبع وCOD</li></ul>
+        </div>
+      </div>
+      <div class="tri-node n-br">
+        <div class="card tn-card glow">
+          <div class="tn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2M12 11.5v5M9.5 14h5"/></svg></div>
+          <h4>الصيدلية</h4><p class="tn-sub">B2B</p>
+          <ul><li>لوحة طلبات ومنتجات</li><li>تحكم بالسعر والعروض</li><li>تسويات شفافة</li></ul>
+        </div>
+      </div>
+      <div class="tri-node n-bl">
+        <div class="card tn-card glow">
+          <div class="tn-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M7 17h6l2.5-6H18M13 8h2l1.5 3"/></svg></div>
+          <h4>الكابتن</h4><p class="tn-sub">التوصيل</p>
+          <ul><li>طلبات ضمن نطاقه</li><li>خريطة وسجل أرباح</li><li>تسوية يومية</li></ul>
+        </div>
+      </div>
+      <div class="tri-core">
+        <div class="core-card">
+          <h4>قلب التشغيل<br>والصيدلي</h4>
+          <span class="core-sub">الطبقة التي تصنع الثقة</span>
+        </div>
+        <div class="core-chips"><span>مطابقة</span><span>اعتماد</span><span>SLA</span><span>تصعيد</span><span>سجل تدقيق</span></div>
+      </div>
+    </div>
+
+    <div class="steps mt-l rv" style="--d:2">
+      <span class="step"><span class="sn">1</span>بحث</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="step"><span class="sn">2</span>رفع الوصفة</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="step"><span class="sn">3</span>عروض</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="step"><span class="sn">4</span>اختيار</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="step"><span class="sn">5</span>توصيل</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+      <span class="step"><span class="sn">6</span>COD</span>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>03</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 4 · القيمة المضافة والتموضع ═══════════ -->
+<section class="slide" id="s4" data-title="القيمة والتموضع">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">03 — التموضع</p>
+      <h2 class="h2">«شبكة صيدليات موثّقة — <span class="grad-text">لا متجر واحد ولا دليفري عام</span>»</h2>
+    </header>
+
+    <div class="grid g5 rv" style="--d:1">
+      <div class="card pad hover" style="display:flex;flex-direction:column;gap:8px">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l7 3v5c0 4.5-3 8.5-7 10-4-1.5-7-5.5-7-10V6z"/><path d="M9 12l2 2 4-4"/></svg></span>
+        <h4 style="font-size:15px">ثقة</h4>
+        <p class="dim" style="font-size:12.5px">اسم الصيدلية المرخّصة، تاريخ الاعتماد، والصيدلي المتابع.</p>
+      </div>
+      <div class="card pad hover" style="display:flex;flex-direction:column;gap:8px">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3.5" y="7" width="17" height="13" rx="2.5"/><path d="M3.5 11h17M9 15h3"/></svg></span>
+        <h4 style="font-size:15px">توفّر</h4>
+        <p class="dim" style="font-size:12.5px">«متاح / يحتاج تأكيداً» مع وقت تحديث واضح — لا كتالوج نظري.</p>
+      </div>
+      <div class="card pad hover" style="display:flex;flex-direction:column;gap:8px">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 3H5a2 2 0 0 0-2 2v3M16 3h3a2 2 0 0 1 2 2v3M8 21H5a2 2 0 0 1-2-2v-3M16 21h3a2 2 0 0 0 2-2v-3M7 12h10"/></svg></span>
+        <h4 style="font-size:15px">اختيار</h4>
+        <p class="dim" style="font-size:12.5px">عروض متعددة: قارن بالسعر والمسافة والوقت — بلا مزاد على الصيدلية.</p>
+      </div>
+      <div class="card pad hover" style="display:flex;flex-direction:column;gap:8px">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M9 3h6M10 3v5.5L5.8 17a3 3 0 0 0 2.7 4.4h7a3 3 0 0 0 2.7-4.4L14 8.5V3"/><path d="M8 14h8"/></svg></span>
+        <h4 style="font-size:15px">صيدلي</h4>
+        <p class="dim" style="font-size:12.5px">يراجع الوصفة ولا يستبدل المادة الفعالة دون موافقته.</p>
+      </div>
+      <div class="card pad hover" style="display:flex;flex-direction:column;gap:8px">
+        <span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+        <h4 style="font-size:15px">تتبع</h4>
+        <p class="dim" style="font-size:12.5px">توصيل قابل للتتبع، إيصال دقيق، وتسوية شفافة للطرفين.</p>
+      </div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="M21 21l-4.3-4.3"/></svg></span>
+      <p class="q">نُظهر من يملك الدواء <span class="grad-text">الآن</span> — مع وقت التحديث لكل مخزون.</p>
+    </div>
+
+    <div class="grid g2 mt-m rv" style="--d:3">
+      <div class="card quote-card">
+        <p>محور المقارنات الخمسة: تحقق وترخيص ← توفّر مؤكد ← صيدلي ← خيارات شفافة ← توصيل قابل للتتبع.</p>
+        <p class="qt">لا ندخل حرب «أسرع دائماً» أو «أرخص دائماً» قبل توفّر البيانات.</p>
+      </div>
+      <div class="card quote-card">
+        <p>حدود الوعد: صِلة تُسهّل الوصول — ولا تشخّص ولا تستبدل الطبيب أو الصيدلي.</p>
+        <p class="qt">لا تُسوَّق كخدمة إسعاف أو كبديل للطوارئ الطبية.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>04</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 5 · شرائح العملاء ═══════════ -->
+<section class="slide" id="s5" data-title="شرائح العملاء">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">04 — الجمهور</p>
+      <h2 class="h2">أربع شرائح ذات أولوية — <span class="grad-text">وأربع رسائل مختلفة</span></h2>
+      <p class="lede">كل شريحة لها «وظيفة» تشتريها من صِلة، ومخاوفها وقنواتها الخاصة — لا حملة واحدة للجميع.</p>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c.7-3 3-4.5 5.5-4.5s4.8 1.5 5.5 4.5"/><circle cx="17" cy="9.5" r="2.3"/><path d="M15.5 14.8c2.6.2 4.3 1.6 5 4.2"/></svg></span> مدير/ة علاج الأسرة</h4>
+        <p class="mt-s dim">يرفع الدواء للأب والأم والأطفال مع سجل الطلبات وعنوان محفوظ.</p>
+        <div class="pillrow mt-m"><span class="chip" style="font-size:11px"><b>المخاوف:</b> الاعتمادية</span><span class="chip teal" style="font-size:11px">فيسبوك + واتساب</span></div>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v10.5M12 13.5l-3-3M12 13.5l3-3"/><rect x="4" y="15" width="16" height="6" rx="2"/></svg></span> المزمن / مقدم الرعاية</h4>
+        <p class="mt-s dim">إعادة طلب شهرية ثابتة، وحساسية عالية للتوفّر والبديل الآمن.</p>
+        <div class="pillrow mt-m"><span class="chip" style="font-size:11px"><b>المخاوف:</b> التوفّر الدائم</span><span class="chip teal" style="font-size:11px">تذكّرات + واتساب</span></div>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M13 3L5 13.5h6L11 21l8-10.5h-6z"/></svg></span> المستخدم الرقمي الشاب</h4>
+        <p class="mt-s dim">OTC وعناية وفيتامينات — قابل للتجربة والتوصية والتفاعل.</p>
+        <div class="pillrow mt-m"><span class="chip" style="font-size:11px"><b>المخاوف:</b> تجربة سلسة</span><span class="chip teal" style="font-size:11px">تيك توك + إنستغرام</span></div>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="5" width="16" height="16" rx="2.5"/><path d="M9 3v4M15 3v4M4 11h16M9 16h2"/></svg></span> الموظف / الطالب الحضري</h4>
+        <p class="mt-s dim">وقت محدود — يريد طلباً بسيطاً ودفعاً نقدياً دون عناء.</p>
+        <div class="pillrow mt-m"><span class="chip" style="font-size:11px"><b>المخاوف:</b> السرعة والزمن</span><span class="chip teal" style="font-size:11px">جغرافي + بحث</span></div>
+      </div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></span>
+      <p style="font-size:clamp(12.5px,1.15vw,15.5px);color:var(--ink2);line-height:1.9"><b style="color:var(--ink)">خارج مركز المدينة:</b> قيمة عالية، لكن تكلفة وزمن التوصيل قد يجعلان اقتصاديات الوحدة سلبية — <span class="hl">يؤجل لمرحلة لاحقة أو نقطة استلام</span>.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>05</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 6 · المنافسة ═══════════ -->
+<section class="slide" id="s6" data-title="المنافسة والميزة الدفاعية">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">05 — المنافسة</p>
+      <h2 class="h2">المنافس الحقيقي هو <span class="grad-text">العادة الحالية</span> — لا تطبيق واحد</h2>
+    </header>
+
+    <div class="matrix rv" style="--d:1">
+      <div class="mx-h">محور المقارنة</div>
+      <div class="mx-h">هاتف + واتساب<small>صيدلية الحي</small></div>
+      <div class="mx-h">تطبيق صيدلية واحدة<small>نمط El Khabiry</small></div>
+      <div class="mx-h">دليفري عام<small>صفحة صيدليات Talabat</small></div>
+      <div class="mx-h us">صِلة<small>شبكة صيدليات موثّقة</small></div>
+
+      <div class="mx-r">ثقة صيدلية مرخّصة</div>
+      <div class="mx-c"><span class="v yes">✓</span></div><div class="mx-c"><span class="v mid">◐</span></div><div class="mx-c"><span class="v no">—</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+
+      <div class="mx-r">توفّر مؤكد لحظي</div>
+      <div class="mx-c"><span class="v no">—</span></div><div class="mx-c"><span class="v yes">✓</span></div><div class="mx-c"><span class="v no">—</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+
+      <div class="mx-r">مقارنة عروض متعددة</div>
+      <div class="mx-c"><span class="v no">—</span></div><div class="mx-c"><span class="v no">—</span></div><div class="mx-c"><span class="v mid">◐</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+
+      <div class="mx-r">صيدلي متابع</div>
+      <div class="mx-c"><span class="v yes">✓</span></div><div class="mx-c"><span class="v mid">◐</span></div><div class="mx-c"><span class="v no">—</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+
+      <div class="mx-r">توصيل قابل للتتبع</div>
+      <div class="mx-c"><span class="v no">—</span></div><div class="mx-c"><span class="v mid">◐</span></div><div class="mx-c"><span class="v yes">✓</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+
+      <div class="mx-r">شبكة محلية أوسع</div>
+      <div class="mx-c"><span class="v no">—</span></div><div class="mx-c"><span class="v no">—</span></div><div class="mx-c"><span class="v mid">◐</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card quote-card">
+        <p>المنافس المباشر (الصيدلية عبر الهاتف/واتساب) قوي بالعلاقة والثقة — <span class="hl">اكسبه كشريك، لا تحاول إزالته</span>.</p>
+        <p class="qt">الميزة الدفاعية: شبكة موثّقة + توفّر مؤكد + صيدلي في الحلقة.</p>
+      </div>
+      <div class="card quote-card">
+        <div class="legend" style="margin-bottom:10px"><span><span class="v" style="background:rgba(94,234,212,.16);color:var(--mint);border:1px solid rgba(94,234,212,.4)">✓</span>قوي</span><span><span class="v" style="background:rgba(251,191,36,.13);color:var(--amber);border:1px solid rgba(251,191,36,.35)">◐</span>جزئي</span><span><span class="v" style="background:rgba(255,255,255,.05);color:var(--ink3);border:1px solid rgba(255,255,255,.12)">—</span>غائب</span></div>
+        <p>بلاطات «طلبات» وصفحات Facebook ومجموعات الواتساب لا تملك SLA ولا مقارنة ولا أثر بيانات — لكنها تربك الوعد بالسرعة.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>06</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 7 · الثقة والامتثال ═══════════ -->
+<section class="slide" id="s7" data-title="الثقة والامتثال">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">06 — الثقة</p>
+      <h2 class="h2">تحويل الخطر الصحي إلى <span class="grad-text">أصل للعلامة</span></h2>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8.5v7M8.5 12h7"/></svg></span> المصدر والأصالة</h4>
+        <p class="mt-s">صيدليات مرخّصة فقط، تصوير وثائق، تدقيق دوري، batch/expiry عند اللزوم، وبلاغ جودة وتصعيد للجهة المختصة.</p>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M8 4h8l4 4v12a1.5 1.5 0 0 1-1.5 1.5h-11A1.5 1.5 0 0 1 6 20V5.5A1.5 1.5 0 0 1 7.5 4z"/><path d="M9 13h6M9 16.5h4"/></svg></span> الأدوية المقيدة</h4>
+        <p class="mt-s">لا صرف بلا وصفة حيث يلزم، مراجعة صيدلي إلزامية، منع استبدال المادة/التركيز دون موافقة، وقائمة فئات محظورة حسب وزارة الصحة والنقابة.</p>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M4 6h16M4 12h10M4 18h7"/><path d="M18 15l2 2 3.5-3.5" transform="translate(-2.5 0)"/></svg></span> الإعلان الطبي</h4>
+        <p class="mt-s">لا وعود علاج أو شفاء ولا إعلانات مضللة؛ محتوى تثقيفي بمراجعة صيدلي وتدقيق قانوني عراقي قبل كل حملة.</p>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="5" y="10.5" width="14" height="10" rx="2.5"/><path d="M8.5 10.5V8a3.5 3.5 0 0 1 7 0v2.5M12 15v2.5"/></svg></span> الخصوصية</h4>
+        <p class="mt-s">أقل قدر من البيانات، تشفير أثناء النقل، موافقة صريحة للصورة والتذكير، وحذف الوصفة وفق سياسة معلنة — لا إعلانات منها.</p>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="12" r="8.5"/><path d="M12 7.5v5l3 2"/></svg></span> COD والاحتيال</h4>
+        <p class="mt-s">تأكيد WhatsApp/OTP، تحديد محاولات، ضوابط للمستخدم عالي الإلغاء، إيصال ومبلغ دقيق، وتسوية يومية للكابتن.</p>
+      </div>
+      <div class="card pad hover">
+        <h4><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3v4M5.6 5.6l2.8 2.8M18.4 5.6l-2.8 2.8M3 13h18M6 13v7a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2v-7"/></svg></span> سلسلة الحفظ</h4>
+        <p class="mt-s">عبوة غير مفتوحة، حرارة وضوء حسب المنتج، حقيبة مناسبة، تسليم للشخص الصحيح، ورفض المرتجع المفتوح.</p>
+      </div>
+    </div>
+
+    <div class="banner warnb mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5h.01"/></svg></span>
+      <p class="q">للخطر الطبي: اتصل بالطوارئ أو توجه لأقرب مستشفى — <span style="color:var(--amber)">التطبيق ليس إسعافاً</span>. مسار «طلب عاجل» يعني أولوية تشغيل فقط.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>07</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 8 · خطة الإطلاق الجغرافي ═══════════ -->
+<section class="slide" id="s8" data-title="خطة الإطلاق">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">07 — الـ 90 يوماً</p>
+      <h2 class="h2">عنقود واحد في بغداد — ثم <span class="grad-text">توسّع مشروط</span></h2>
+    </header>
+
+    <div class="tl rv" style="--d:1">
+      <div class="card phase">
+        <div class="ph-top"><span class="ph-n">المرحلة 0</span><span class="ph-w">الأسبوعان 1–2</span></div>
+        <h4>إثبات الجاهزية</h4>
+        <ul>
+          <li>تحديد عنقود: الكرادة / الجادرية / المنصور بساعات خدمة واقعية</li>
+          <li>تدقيق UX بالعربية العراقية: أسماء تجارية وعلمية وتهجئات بديلة</li>
+          <li>North Star: طلبات دوائية مكتملة وآمنة لكل صيدلية نشطة + لوحة القمع</li>
+        </ul>
+      </div>
+      <div class="card phase">
+        <div class="ph-top"><span class="ph-n">المرحلة 1</span><span class="ph-w">الأسابيع 3–6</span></div>
+        <h4>كثافة العرض</h4>
+        <ul>
+          <li>15–20 صيدلية مرساة بساعات موثوقة ومخزون متنوع</li>
+          <li>تدريب 60 دقيقة + QR على الكاونتر + مجموعة واتساب تشغيلية</li>
+          <li>حفّازات غير مدمّرة للسعر + كباتن ضمن نصف قطر صغير</li>
+        </ul>
+      </div>
+      <div class="card phase">
+        <div class="ph-top"><span class="ph-n">المرحلة 2</span><span class="ph-w">الأسابيع 7–10</span></div>
+        <h4>طلب محلي مقاس</h4>
+        <ul>
+          <li>حملة «ابحث عن دوائك قبل أن تطلع»: فيديو قصير + QR في العيادات والمختبرات</li>
+          <li>Meta جغرافي حول الصيدليات + Search للنية العالية + TikTok للاعتياد</li>
+          <li>إحالة برصيد توصيل + إعادة استهداف بموافقة عبر واتساب</li>
+        </ul>
+      </div>
+      <div class="card phase">
+        <div class="ph-top"><span class="ph-n">المرحلة 3</span><span class="ph-w">الأسابيع 11–13</span></div>
+        <h4>تحسين وتوسيع</h4>
+        <ul>
+          <li>اختبار 3 رسائل × عرضين × أسلوبَي onboarding — وإيقاف ما يسرّب</li>
+          <li>توسيع منطقة واحدة فقط إذا تحققت كثافة العرض</li>
+          <li>Playbook لتكرار النموذج في البصرة/النجف/كربلاء مع شريك محلي</li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 17l5-5 4 4 7-8"/><path d="M14 8h6v6"/></svg></span>
+      <p class="q">قاعدة التوسّع: <span class="grad-text">≥ 3 عروض قابلة للمقارنة لكل طلب + ≥ 80% قبول خلال SLA</span> — وإلا واصل بناء الكثافة.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>08</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 9 · محرك الصيدليات والكباتن ═══════════ -->
+<section class="slide" id="s9" data-title="محرك الصيدليات والكباتن">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">08 — السوق الثنائي</p>
+      <h2 class="h2">لا طلب بلا عرض — <span class="grad-text">ولا عرض بلا طلب</span></h2>
+    </header>
+
+    <div class="grid g21 rv" style="--d:1">
+      <div class="card pad">
+        <h4 style="margin-bottom:10px"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="8" width="16" height="12" rx="2"/><path d="M9 8V6a3 3 0 0 1 6 0v2"/></svg></span> آلة بيع الصيدليات (B2B)</h4>
+        <ol class="ministeps">
+          <li><span class="mn">1</span><div><b>قائمة</b><span>خرائط + نقابة ومناطق تجارية + إحالات الموزعين</span></div></li>
+          <li><span class="mn">2</span><div><b>تأهيل</b><span>ترخيص، ساعات عمل، تغطية، أصناف أساسية، قبول COD، شخص القرار</span></div></li>
+          <li><span class="mn">3</span><div><b>عرض 15 دقيقة</b><span>طلب حي من هاتف المندوب — لا عرض شرائح فقط</span></div></li>
+          <li><span class="mn">4</span><div><b>تفعيل في الموقع</b><span>QR + أعلى 200 SKU أو ربط مخزون + تدريب + طلب تجريبي</span></div></li>
+          <li><span class="mn">5</span><div><b>نجاح</b><span>اتصال بعد 48 ساعة و7 أيام + تقرير قبول/إلغاء + زيارة أسبوعية</span></div></li>
+        </ol>
+      </div>
+
+      <div style="display:flex;flex-direction:column;gap:12px;min-width:0">
+        <div class="card quote-card glow">
+          <p>«لا نملك مخزونك ولا نفرض سعرك. نرسل لك مرضى يبحثون عن دواء متوفر لديك — وأنت تقبل أو ترفض من لوحة واضحة، مع تسوية مفهومة.»</p>
+          <p class="qt">الرسالة البيعية · باقة الشريك: تسجيل مجاني، عمولة على الطلب المكتمل فقط، صفحة موثّقة، وتحكم بالسعر</p>
+        </div>
+        <div class="card pad">
+          <h4 style="margin-bottom:8px"><span class="ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="7" cy="17" r="3"/><circle cx="17" cy="17" r="3"/><path d="M7 17h6l2.5-6H18"/></svg></span> محرك الكباتن</h4>
+          <p style="line-height:2">تجنيد ضمن نصف قطر صغير واختبار نهار/مساء · حقيبة موثوقة ولباس وهوية واضحة · طلبات ضمن النطاق مع خريطة وسجل أرباح · <span class="hl">تسوية يومية</span> وإيصال دقيق · قياس الدخل/ساعة وقبول وإتمام.</p>
+          <div class="pillrow mt-s">
+            <span class="chip" style="font-size:11px">«عندي واتساب» → <b>لا يلغيه، يضيف لوحة وكباتن</b></span>
+            <span class="chip" style="font-size:11px">«العمولة مرتفعة» → <b>اختبر 30 يوماً واقس الصافي</b></span>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>09</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 10 · محرك المستخدمين والمحتوى ═══════════ -->
+<section class="slide" id="s10" data-title="محرك المستخدمين والمحتوى">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">09 — الطلب B2C</p>
+      <h2 class="h2">خمس حملات — <span class="grad-text">وخمس قنوات واضحة</span></h2>
+    </header>
+
+    <div class="pillrow rv" style="--d:1">
+      <span class="chip"><b>فيسبوك</b> العائلة والأحياء + Click-to-WhatsApp</span>
+      <span class="chip"><b>إنستغرام</b> Reels وقصص الصيدلي + إعادة استهداف</span>
+      <span class="chip"><b>تيك توك</b> مواقف إنسانية 20–30 ث — بلا قبل/بعد طبي</span>
+      <span class="chip"><b>واتساب Business</b> تأكيد وتحديثات وإعادة طلب بموافقة</span>
+      <span class="chip"><b> ميداني ومجتمعي</b> QR في صيدليات وعيادات ومختبرات وجامعات</span>
+      <span class="chip"><b>ASO/SEO</b> «توصيل دواء بغداد» · «رفع وصفة»</span>
+    </div>
+
+    <div class="grid g5 mt-m rv" style="--d:2">
+      <div class="card pad hover">
+        <h4 style="font-size:14.5px">«لا تلف بغداد»</h4>
+        <p class="dim mt-s" style="font-size:12px">مشهد عائلي: بحث، رفع وصفة، عروض، وصول.</p>
+        <p class="mt-s" style="font-size:11.5px;color:var(--mint);font-weight:700">CTA: صوّر وصفتك وخلي صِلة تدور لك</p>
+      </div>
+      <div class="card pad hover">
+        <h4 style="font-size:14.5px">«متوفر فعلاً»</h4>
+        <p class="dim mt-s" style="font-size:12px">الصيدلية، المسافة، وقت التحديث، السعر والأجرة.</p>
+        <p class="mt-s" style="font-size:11.5px;color:var(--mint);font-weight:700">CTA: اعرف قبل لا تطلع</p>
+      </div>
+      <div class="card pad hover">
+        <h4 style="font-size:14.5px">«صِلة لأهلي»</h4>
+        <p class="dim mt-s" style="font-size:12px">ابن/ابنة يطلب لوالديه بعنوان محفوظ وتحديثات.</p>
+        <p class="mt-s" style="font-size:11.5px;color:var(--mint);font-weight:700">CTA: خلّي دواء أهلك أقرب</p>
+      </div>
+      <div class="card pad hover">
+        <h4 style="font-size:14.5px">«صيدليتك صارت أقرب»</h4>
+        <p class="dim mt-s" style="font-size:12px">B2B: الصيدلي يستقبل طلباً حقيقياً ويقبله.</p>
+        <p class="mt-s" style="font-size:11.5px;color:var(--mint);font-weight:700">CTA: سجّل مجاناً — والاعتماد أولاً</p>
+      </div>
+      <div class="card pad hover">
+        <h4 style="font-size:14.5px">«الكابتن الموثوق»</h4>
+        <p class="dim mt-s" style="font-size:12px">هوية وحقيبة وتوقيع تسليم — بلا تصوير بلا موافقة.</p>
+        <p class="mt-s" style="font-size:11.5px;color:var(--mint);font-weight:700">CTA: الثقة توصل</p>
+      </div>
+    </div>
+
+    <div class="banner warnb mt-l rv" style="--d:3">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3l9 16H3z"/><path d="M12 10v4M12 17.5h.01"/></svg></span>
+      <div>
+        <p class="q" style="font-size:clamp(13px,1.25vw,17px)">لهجة عراقية منضبطة — لا نقول أبداً:</p>
+        <div class="tone-strip mt-s">
+          <span class="bad">«يشفي»</span><span class="bad">«مضمون 100%»</span><span class="bad">«أسرع إسعاف»</span><span class="bad">«أرخص دواء»</span><span class="bad">تشجيع علاج بلا وصفة</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>10</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 11 · القياس والاقتصاد ═══════════ -->
+<section class="slide" id="s11" data-title="القياس والاقتصاد">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">10 — الأداء</p>
+      <h2 class="h2">أهداف الـ 90 يوماً — <span class="grad-text">تُقاس، لا تُوعد</span></h2>
+      <p class="lede"><b style="color:var(--ink)">North Star:</b> طلبات دوائية مكتملة وآمنة لكل صيدلية نشطة — لا تنزيلات.</p>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card mcard"><span class="t">صيدليات معتمدة</span><div class="n"><span class="cnum" data-to="60">0</span></div><span class="l">في عنقود الإطلاق — منها 40 نشطة أسبوعياً</span></div>
+      <div class="card mcard"><span class="t">طلبات مكتملة</span><div class="n"><span class="cnum" data-to="3000">0</span></div><span class="l">خلال أول 90 يوماً</span></div>
+      <div class="card mcard good"><span class="t">ملء الطلب</span><div class="n"><span class="suf">≥</span> <span class="cnum" data-to="85">0</span><span class="suf">%</span></div><span class="l">ضمن ساعات الخدمة</span></div>
+      <div class="card mcard good"><span class="t">قبول الصيدلية</span><div class="n"><span class="pre">&lt;</span><span class="cnum" data-to="5">0</span> <span class="suf">د</span></div><span class="l">وسيط زمن قبول الطلب</span></div>
+      <div class="card mcard good"><span class="t">التوصيل الحضري</span><div class="n"><span class="pre">&lt;</span><span class="cnum" data-to="60">0</span> <span class="suf">د</span></div><span class="l">للطلبات الجاهزة — يُقاس لا يُوعد</span></div>
+      <div class="card mcard"><span class="t">إعادة شراء 30 يوماً</span><div class="n"><span class="suf">≥</span> <span class="cnum" data-to="25">0</span><span class="suf">%</span></div><span class="l">للطلبات غير الطارئة</span></div>
+      <div class="card mcard warn"><span class="t">إلغاء COD</span><div class="n"><span class="suf">≤</span> <span class="cnum" data-to="12">0</span><span class="suf">%</span></div><span class="l">مع تسوية يومية للكابتن</span></div>
+      <div class="card mcard"><span class="t">شكاوى دواء حرجة</span><div class="n"><span class="cnum" data-to="0">0</span></div><span class="l">حالات تطابق/سلامة حرجة — صفرية</span></div>
+    </div>
+
+    <div class="card pad mt-l rv" style="--d:2">
+      <p class="t dim" style="font-family:var(--fd);font-weight:700;font-size:12px;letter-spacing:.04em">القمع · FUNNEL</p>
+      <div class="funnel mt-s">
+        <span class="fstep"><span class="fi">01</span>وصول</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep"><span class="fi">02</span>تثبيت</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep"><span class="fi">03</span>تسجيل</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep hot"><span class="fi">04</span>بحث / وصفة</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep"><span class="fi">05</span>عرض</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep"><span class="fi">06</span>اختيار</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep"><span class="fi">07</span>قبول</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep"><span class="fi">08</span>تجهيز</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep hot"><span class="fi">09</span>تسليم</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep"><span class="fi">10</span>إعادة طلب</span><span class="farr"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="fstep hot"><span class="fi">11</span>إحالة</span>
+      </div>
+    </div>
+
+    <div class="grid g2 mt-m rv" style="--d:3">
+      <div class="card quote-card">
+        <p style="font-size:clamp(12px,1.1vw,15px)">قاعدة التوقف: <span class="hl">لا توسّع جغرافياً</span> إذا كان المساهمة/طلب سالباً بعد الخصم، أو انخفضت السلامة والتسليم عن SLA.</p>
+      </div>
+      <div class="eq">CAC = (ad_spend + sales_cost) ÷ first_orders<br>contribution = fee + delivery − driver − cod/support − discount</div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>11</b> <i>/ 12</i></span></footer>
+</section>
+
+<!-- ═══════════ 12 · القرارات المطلوبة ═══════════ -->
+<section class="slide" id="s12" data-title="القرارات المطلوبة">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">11 — القرار</p>
+      <h2 class="h2">خمسة قرارات <span class="grad-text">لتبدأ هذه الليلة… وتبدأ أسبوعياً</span></h2>
+    </header>
+
+    <div class="decisions rv" style="--d:1">
+      <div class="card dec hover"><span class="dn">1</span><div><b>اعتماد عنقود الإطلاق</b><span>الكرادة / الجادرية / المنصور — حتى يصبح الوعد «متاحاً فعلاً».</span></div></div>
+      <div class="card dec hover"><span class="dn">2</span><div><b>ميزانية اختبار الـ pilot (14 يوماً)</b><span>للقياس لا للتوسع: time-to-first-offer و contribution/order قبل أي إنفاق إضافي.</span></div></div>
+      <div class="card dec hover"><span class="dn">3</span><div><b>مسؤول امتثال وسلامة (صيدلي)</b><span>صلاحيات على الوصفات والفئات المحظورة والتصعيد وسجل التدقيق.</span></div></div>
+      <div class="card dec hover"><span class="dn">4</span><div><b>20 صيدلية مرساة</b><span>بساعات موثوقة وكثافة مخزون — ثم تجلب الطلب حولها.</span></div></div>
+    </div>
+
+    <div class="grid g12 mt-m rv" style="--d:2">
+      <div class="card dec hover"><span class="dn">5</span><div><b>تاريخ pilot محدد + اجتماع أسبوعي</b><span>Growth / Operations / Safety — على نفس لوحة المؤشرات وبنفس القواعد.</span></div></div>
+      <div class="card quote-card glow">
+        <p>الأسبوع الأول: <span class="hl">45 مقابلة</span> (10 مرضى · 10 مقدمي رعاية · 15 صيدلية · 10 كباتن) + صفحة هبوط/واتساب للصيدليات بمؤشر «اعتماد صيدلية» قابل للإثبات + تحليلات موحّدة بأحداث القمع وUTM.</p>
+        <p class="qt">قائمة تنفيذ فورية خلال 7 أيام</p>
+      </div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:3">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></span>
+      <p class="q">هذا ليس شعاراً — <span class="grad-text">قرار إطلاق</span>. دواؤك الموثوق، من صيدلية قريبة، وبالسعر والوقت الواضحين.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صِلة دوائي · SILA IQ</span><span class="pageno"><b>12</b> <i>/ 12</i></span></footer>
+</section>
+
+</main>
+
+<!-- chrome -->
+<nav class="rail" id="rail" aria-label="السلايد"></nav>
+
+<div class="nav" role="toolbar" aria-label="التنقل">
+  <button class="nbtn" id="btnOverview" title="نظرة عامة (G)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>النظرة</span></button>
+  <span class="sep"></span>
+  <button class="nbtn" id="btnPrev" title="السابق (→)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg><span>السابق</span></button>
+  <button class="nbtn primary" id="btnNext" title="التالي (←)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg><span>التالي</span></button>
+  <span class="sep"></span>
+  <button class="nbtn iconic" id="btnFull" title="ملء الشاشة (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg></button>
+  <button class="nbtn iconic" id="btnPrint" title="طباعة / PDF (P)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 8V4h10v4M7 16H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-3"/><rect x="7" y="14" width="10" height="6" rx="1"/></svg></button>
+</div>
+
+<div class="hint" id="hint"><kbd>←</kbd> التالي &nbsp; <kbd>→</kbd> السابق &nbsp; <kbd>G</kbd> نظرة عامة &nbsp; <kbd>F</kbd> ملء الشاشة &nbsp; <kbd>P</kbd> طباعة/PDF &nbsp; <kbd>H</kbd> إخفاء</div>
+
+<!-- overview -->
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="نظرة عامة على السلايد">
+  <div class="ov-head">
+    <div><h3>نظرة عامة — 12 شريحة</h3><p>انقر أي شريحة للانتقال إليها · Esc للإغلاق</p></div>
+    <button class="ov-close" id="ovClose" aria-label="إغلاق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="ov-grid" id="ovGrid"></div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var idx = 0;
+  var pbar = document.getElementById('pbar');
+  var rail = document.getElementById('rail');
+  var ov = document.getElementById('ov');
+  var ovGrid = document.getElementById('ovGrid');
+  var hint = document.getElementById('hint');
+
+  /* ---- rail dots ---- */
+  slides.forEach(function(s, i){
+    var b = document.createElement('button');
+    b.setAttribute('aria-label', (i+1) + '. ' + (s.dataset.title || ''));
+    b.addEventListener('click', function(){ goTo(i); });
+    rail.appendChild(b);
+  });
+  var dots = Array.prototype.slice.call(rail.children);
+
+  /* ---- counters ---- */
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function runCounters(sl){
+    sl.querySelectorAll('.cnum').forEach(function(el){
+      var to = parseFloat(el.dataset.to || '0');
+      var t0 = null, dur = 1000;
+      el.textContent = '0';
+      function tick(ts){
+        if(!t0) t0 = ts;
+        var p = Math.min(1, (ts - t0) / dur);
+        var e = 1 - Math.pow(1 - p, 3); /* easeOutCubic */
+        el.textContent = fmt(to * e);
+        if(p < 1) requestAnimationFrame(tick);
+        else el.textContent = fmt(to);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  /* ---- navigation ---- */
+  function goTo(i){
+    i = Math.max(0, Math.min(total - 1, i));
+    var changed = i !== idx;
+    idx = i;
+    slides.forEach(function(s, k){ s.classList.toggle('is-active', k === idx); });
+    dots.forEach(function(d, k){ d.classList.toggle('on', k === idx); });
+    pbar.style.width = ((idx + 1) / total * 100) + '%';
+    if(changed){
+      try { history.replaceState(null, '', '#s' + (idx + 1)); } catch(e){}
+      document.title = (slides[idx].dataset.title || '') + ' — صِلة دوائي · SILA IQ';
+      runCounters(slides[idx]);
+      if(ov.classList.contains('open')) markOv();
+    }
+  }
+  function next(){ goTo(idx + 1); }
+  function prev(){ goTo(idx - 1); }
+
+  /* ---- overview ---- */
+  function buildOv(){
+    ovGrid.innerHTML = '';
+    slides.forEach(function(s, i){
+      var item = document.createElement('div');
+      item.className = 'ov-item' + (i === idx ? ' on' : '');
+      item.tabIndex = 0;
+      var thumb = document.createElement('div');
+      thumb.className = 'ov-thumb';
+      var clone = s.cloneNode(true);
+      clone.classList.add('is-active');
+      clone.removeAttribute('id');
+      var wrap = document.createElement('div');
+      wrap.className = 'ov-src';
+      wrap.appendChild(clone);
+      thumb.appendChild(wrap);
+      var cap = document.createElement('div');
+      cap.className = 'ov-cap';
+      cap.innerHTML = '<span class="ov-n">' + String(i + 1).padStart(2, '0') + '</span><span>' + (s.dataset.title || '') + '</span>';
+      item.appendChild(thumb);
+      item.appendChild(cap);
+      function open(){ closeOv(); goTo(i); }
+      item.addEventListener('click', open);
+      item.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); } });
+      ovGrid.appendChild(item);
+    });
+    fitOv();
+  }
+  function fitOv(){
+    ovGrid.querySelectorAll('.ov-src').forEach(function(src){
+      var w = src.parentElement.clientWidth;
+      src.style.transform = 'scale(' + (w / 1200) + ')';
+      src.parentElement.style.height = (675 * (w / 1200)) + 'px';
+    });
+  }
+  function markOv(){
+    ovGrid.querySelectorAll('.ov-item').forEach(function(it, i){ it.classList.toggle('on', i === idx); });
+  }
+  function openOv(){
+    buildOv();
+    ov.classList.add('open');
+  }
+  function closeOv(){ ov.classList.remove('open'); }
+
+  /* ---- controls ---- */
+  document.getElementById('btnNext').addEventListener('click', next);
+  document.getElementById('btnPrev').addEventListener('click', prev);
+  document.getElementById('btnOverview').addEventListener('click', function(){ ov.classList.contains('open') ? closeOv() : openOv(); });
+  document.getElementById('ovClose').addEventListener('click', closeOv);
+  ov.addEventListener('click', function(e){ if(e.target === ov) closeOv(); });
+  document.getElementById('btnFull').addEventListener('click', function(){
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+    else document.exitFullscreen && document.exitFullscreen();
+  });
+  document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'F12' || (e.ctrlKey || e.metaKey)) return;
+    switch(e.key){
+      case 'ArrowLeft': case ' ': case 'PageDown': case 'Enter':
+        if(document.activeElement && /BUTTON|INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+        e.preventDefault(); next(); break;
+      case 'ArrowRight': case 'PageUp': case 'Backspace':
+        e.preventDefault(); prev(); break;
+      case 'ArrowDown': e.preventDefault(); next(); break;
+      case 'ArrowUp': e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); goTo(0); break;
+      case 'End': e.preventDefault(); goTo(total - 1); break;
+      case 'f': case 'F': document.getElementById('btnFull').click(); break;
+      case 'g': case 'G': ov.classList.contains('open') ? closeOv() : openOv(); break;
+      case 'p': case 'P': window.print(); break;
+      case 'h': case 'H': hint.classList.toggle('hide'); break;
+      case 'Escape': closeOv(); break;
+      default:
+        if(/^[0-9]$/.test(e.key)){
+          var n = e.key === '0' ? 10 : parseInt(e.key, 10);
+          if(n <= total) goTo(n - 1);
+        }
+    }
+  });
+
+  /* ---- swipe ---- */
+  var tx = null;
+  document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if(Math.abs(dx) > 55){ dx < 0 ? next() : prev(); }
+    tx = null;
+  }, {passive:true});
+
+  window.addEventListener('resize', function(){ if(ov.classList.contains('open')) fitOv(); });
+
+  /* ---- init from hash ---- */
+  var m = (location.hash || '').match(/s(\d+)/);
+  if(m) idx = Math.max(0, Math.min(total - 1, parseInt(m[1], 10) - 1));
+  goTo(idx);
+})();
+</script>
+</body>
+</html>
