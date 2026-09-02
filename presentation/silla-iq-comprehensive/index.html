@@ -1,0 +1,1406 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="color-scheme" content="light">
+<title>صلة دوائي · Silla Dawaai — الملف الشامل التنفيذي (31 صفحة تفاعلية)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cairo:wght@500;600;700;800;900&family=Tajawal:wght@300;400;500;700;800&display=swap" rel="stylesheet">
+<style>
+/* ============================================================
+   SILLA DAWAAI — الملف الشامل التنفيذي
+   Theme: Executive Light · Teal trust #2C7873 / #0E7C86 · #EBFAF1
+   Font intent: Rawasi (رواسي العربي) → fallback Tajawal / Cairo
+   ============================================================ */
+:root{
+  --teal:#2C7873; --safety:#0E7C86; --deep:#0B3B3A; --inkdark:#0E2526;
+  --bg:#f4f9f7; --bg2:#e9f3ef;
+  --ink:#12302f; --ink2:#47605f; --ink3:#6c8785;
+  --mint:#0F9D8F; --good:#12966b; --amber:#e8a13c; --red:#d14949;
+  --card:#ffffff; --card-soft:#f6fbf9;
+  --line:#e0ece7; --line2:#d3e3dd;
+  --line-teal:rgba(44,120,115,.32);
+  --grad:linear-gradient(120deg,#2C7873 0%,#0E7C86 52%,#1F6E8C 100%);
+  --r:18px; --r-sm:12px;
+  --sh:0 14px 44px rgba(18,62,60,.10);
+  --sh-sm:0 6px 18px rgba(18,62,60,.07);
+  --fd:'Rawasi','Cairo',sans-serif;
+  --fb:'Rawasi','Tajawal',sans-serif;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{height:100%}
+body{font-family:var(--fb);color:var(--ink);background:var(--bg);overflow:hidden;-webkit-font-smoothing:antialiased}
+::selection{background:rgba(44,120,115,.18)}
+
+/* ambient light background */
+.bgfx{position:fixed;inset:0;z-index:0;pointer-events:none;
+  background:
+    radial-gradient(54% 46% at 84% 6%, rgba(44,120,115,.10), transparent 62%),
+    radial-gradient(46% 40% at 8% 20%, rgba(14,124,134,.09), transparent 60%),
+    radial-gradient(58% 52% at 50% 110%, rgba(44,120,115,.07), transparent 62%),
+    linear-gradient(180deg,#fbfdfc 0%, #f4f9f7 55%, #eff6f3 100%);}
+.bgfx::after{content:"";position:absolute;inset:0;opacity:.5;
+  background:linear-gradient(rgba(44,120,115,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(44,120,115,.05) 1px,transparent 1px);
+  background-size:58px 58px;
+  mask-image:radial-gradient(72% 72% at 50% 40%,#000 32%,transparent 100%);
+  -webkit-mask-image:radial-gradient(72% 72% at 50% 40%,#000 32%,transparent 100%);}
+.orb{position:fixed;z-index:0;border-radius:50%;filter:blur(84px);opacity:.45;pointer-events:none}
+.orb.o1{width:440px;height:440px;left:-150px;bottom:-170px;background:radial-gradient(circle,rgba(44,120,115,.30),transparent 65%);animation:drift 16s ease-in-out infinite alternate}
+.orb.o2{width:400px;height:400px;right:-130px;top:-150px;background:radial-gradient(circle,rgba(14,124,134,.26),transparent 65%);animation:drift 20s ease-in-out infinite alternate-reverse}
+@keyframes drift{from{transform:translate(0,0) scale(1)}to{transform:translate(46px,-38px) scale(1.12)}}
+
+/* progress */
+.progress{position:fixed;top:0;right:0;left:0;height:4px;background:rgba(44,120,115,.10);z-index:50}
+.progress i{display:block;height:100%;width:0;background:var(--grad);transition:width .35s ease}
+
+/* deck & slides */
+.deck{position:fixed;inset:0;z-index:1}
+.slide{position:absolute;inset:0;display:flex;flex-direction:column;
+  padding:clamp(18px,3.4vh,44px) clamp(20px,4.6vw,76px) clamp(56px,8vh,84px);
+  opacity:0;visibility:hidden;transform:translateX(-40px) scale(.992);
+  transition:opacity .5s ease,transform .55s cubic-bezier(.22,.61,.36,1),visibility 0s linear .5s;
+  overflow:hidden}
+.slide.is-active{opacity:1;visibility:visible;transform:none;transition-delay:0s;z-index:2}
+.frame{width:100%;max-width:1560px;margin-inline:auto;flex:1;display:flex;flex-direction:column;min-height:0}
+
+.rv{opacity:0;transform:translateY(15px);transition:opacity .6s ease,transform .6s cubic-bezier(.22,.61,.36,1)}
+.slide.is-active .rv{opacity:1;transform:none;transition-delay:calc(var(--d,0)*90ms + 110ms)}
+
+/* type */
+.num-tag{font-family:var(--fd);font-weight:800;font-size:12.5px;letter-spacing:.12em;color:var(--teal);display:flex;align-items:center;gap:10px}
+.num-tag::before{content:"";width:32px;height:2px;background:var(--grad);border-radius:2px}
+.h2{font-family:var(--fd);font-weight:900;font-size:clamp(24px,3.2vw,46px);line-height:1.3;margin-top:9px;color:var(--inkdark);letter-spacing:-.01em}
+.lede{color:var(--ink2);font-size:clamp(13px,1.3vw,17px);line-height:1.9;max-width:1020px;margin-top:10px}
+.grad-text{background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.hl{color:var(--teal);font-weight:700}
+.kicker{font-family:var(--fd);font-weight:700;font-size:clamp(12px,1.1vw,15px);letter-spacing:.06em;color:var(--ink3)}
+.s-head{flex:0 0 auto;margin-bottom:clamp(12px,2.4vh,26px)}
+.small{font-size:12px;color:var(--ink3);line-height:1.7}
+.lab{font-family:var(--fd);font-weight:800;font-size:12px;color:var(--teal);letter-spacing:.05em;display:flex;align-items:center;gap:8px;margin-bottom:10px}
+.lab::before{content:"";width:20px;height:2px;background:var(--grad);border-radius:2px}
+.pc-tag{font-family:var(--fd);font-weight:800;font-size:11px;letter-spacing:.1em;color:var(--safety);display:inline-flex;gap:8px;align-items:center}
+.pc-tag::before{content:"";width:24px;height:2px;background:var(--grad);border-radius:2px}
+
+/* footer */
+.s-foot{position:absolute;inset-inline:0;bottom:clamp(12px,2.4vh,24px);
+  padding:0 clamp(20px,4.6vw,76px);display:flex;align-items:center;justify-content:space-between;
+  font-size:12px;color:var(--ink3);z-index:3;font-family:var(--fd)}
+.s-foot .brandline{display:flex;align-items:center;gap:8px;font-weight:700;letter-spacing:.02em;color:var(--teal)}
+.s-foot .brandline svg{width:17px;height:17px}
+.pageno{font-weight:700;font-size:12px}
+.pageno b{color:var(--inkdark);font-size:14px}
+.pageno i{font-style:normal;color:var(--ink3)}
+
+/* cards */
+.card{background:var(--card);border:1px solid var(--line);border-radius:var(--r);box-shadow:var(--sh-sm);position:relative}
+.card.pad{padding:clamp(13px,1.4vw,20px)}
+.card.glow{border-color:var(--line-teal);box-shadow:0 0 0 1px rgba(44,120,115,.05),var(--sh)}
+.card.hover{transition:transform .3s ease,border-color .3s ease,box-shadow .3s ease}
+.card.hover:hover{transform:translateY(-4px);border-color:var(--line-teal);box-shadow:var(--sh)}
+.card h4{font-family:var(--fd);font-weight:800;font-size:clamp(13.5px,1.2vw,17.5px);color:var(--inkdark);display:flex;align-items:center;gap:10px}
+.card p{color:var(--ink2);font-size:clamp(11.5px,1vw,14px);line-height:1.85}
+.card .ico{width:36px;height:36px;flex:0 0 36px;border-radius:11px;display:grid;place-items:center;color:var(--teal);
+  background:linear-gradient(135deg,rgba(44,120,115,.12),rgba(14,124,134,.08));border:1px solid var(--line-teal)}
+.card .ico svg{width:19px;height:19px}
+.card .dim{color:var(--ink3)}
+.quote-card{padding:clamp(13px,1.4vw,20px)}
+.quote-card p{font-family:var(--fd);font-weight:700;font-size:clamp(13px,1.2vw,16.5px);line-height:2;color:var(--inkdark)}
+.quote-card .qt{font-size:11px;color:var(--ink3);font-weight:700;margin-top:5px}
+.ico-sq{width:42px;height:42px;flex:0 0 42px;border-radius:12px;display:grid;place-items:center;color:var(--teal);
+  background:linear-gradient(135deg,rgba(44,120,115,.13),rgba(14,124,134,.08));border:1px solid var(--line-teal)}
+.ico-sq svg{width:21px;height:21px}
+.mt-s{margin-top:9px}.mt-m{margin-top:14px}.mt-l{margin-top:22px}
+.dim{color:var(--ink3)}
+
+/* grids */
+.grid{display:grid;gap:clamp(10px,1.1vw,16px)}
+.g2{grid-template-columns:repeat(2,1fr)}
+.g3{grid-template-columns:repeat(3,1fr)}
+.g4{grid-template-columns:repeat(4,1fr)}
+.g5{grid-template-columns:repeat(5,1fr)}
+.g21{grid-template-columns:1.2fr .8fr}
+.g12{grid-template-columns:.8fr 1.2fr}
+
+/* rows / numbered lists */
+.rows{list-style:none;display:flex;flex-direction:column;gap:9px}
+.rows li{display:flex;gap:11px;align-items:flex-start;padding:11px 13px;border-radius:12px;background:var(--card-soft);border:1px solid var(--line)}
+.rows .rn{width:25px;height:25px;flex:0 0 25px;border-radius:8px;display:grid;place-items:center;font-family:var(--fd);font-weight:900;font-size:12px;color:#fff;background:var(--grad)}
+.rows b{font-family:var(--fd);font-weight:800;font-size:clamp(12px,1.05vw,15px);color:var(--inkdark)}
+.rows span{display:block;font-size:clamp(10.8px,0.96vw,13px);color:var(--ink2);line-height:1.75;margin-top:1px}
+
+/* chips / pills */
+.chip{display:inline-flex;align-items:center;gap:8px;padding:7px 13px;border-radius:999px;
+  background:#fff;border:1px solid var(--line2);font-size:clamp(10.5px,.95vw,13px);color:var(--ink2);box-shadow:var(--sh-sm)}
+.chip b{color:var(--inkdark);font-weight:800}
+.chip.teal{border-color:var(--line-teal);background:rgba(44,120,115,.08);color:var(--teal)}
+.chip.warn{border-color:rgba(232,161,60,.4);background:rgba(232,161,60,.10);color:#b0741f}
+.chip svg{width:15px;height:15px}
+.pillrow{display:flex;flex-wrap:wrap;gap:9px}
+
+/* metric cards */
+.mcard{padding:clamp(11px,1.2vw,18px);display:flex;flex-direction:column;gap:6px;min-height:112px;justify-content:center}
+.mcard .n{font-family:var(--fd);font-weight:900;font-size:clamp(28px,2.9vw,50px);line-height:1.1;color:var(--inkdark);
+  display:flex;align-items:baseline;gap:4px;background:var(--grad);-webkit-background-clip:text;background-clip:text;color:transparent}
+.mcard .n .pre,.mcard .n .suf{font-size:.5em;font-weight:800}
+.mcard .l{color:var(--ink2);font-size:clamp(10.5px,.95vw,13.5px);line-height:1.7}
+.mcard .t{font-family:var(--fd);font-weight:700;font-size:11.5px;color:var(--ink3);letter-spacing:.03em}
+.mcard.good .n{background:linear-gradient(120deg,#0F9D8F,#12966b);-webkit-background-clip:text;background-clip:text}
+.mcard.warn .n{background:linear-gradient(120deg,#e8a13c,#d14949);-webkit-background-clip:text;background-clip:text}
+
+/* banners */
+.banner{display:flex;align-items:center;gap:15px;padding:clamp(13px,1.5vh,18px) clamp(15px,1.6vw,22px);
+  border-radius:var(--r);border:1px solid var(--line-teal);
+  background:linear-gradient(120deg,rgba(44,120,115,.09),rgba(14,124,134,.06) 60%,rgba(31,110,140,.05));box-shadow:var(--sh-sm)}
+.banner .q{font-family:var(--fd);font-weight:800;font-size:clamp(15px,1.6vw,22px);line-height:1.7;color:var(--inkdark)}
+.banner.warnb{border-color:rgba(209,73,73,.35);
+  background:linear-gradient(120deg,rgba(232,161,60,.11),rgba(209,73,73,.05))}
+.banner .b-ico{width:42px;height:42px;flex:0 0 42px;border-radius:13px;display:grid;place-items:center;
+  background:rgba(44,120,115,.12);border:1px solid var(--line-teal);color:var(--teal)}
+.banner.warnb .b-ico{background:rgba(209,73,73,.10);border-color:rgba(209,73,73,.35);color:var(--red)}
+.banner .b-ico svg{width:21px;height:21px}
+
+/* journey steps */
+.journey{display:grid;grid-template-columns:repeat(4,1fr);gap:10px}
+.jstep{padding:clamp(11px,1.1vw,16px);text-align:center;position:relative}
+.jstep .jn{width:31px;height:31px;margin:0 auto 9px;border-radius:50%;display:grid;place-items:center;
+  font-family:var(--fd);font-weight:900;font-size:13px;color:#fff;background:var(--grad)}
+.jstep h5{font-family:var(--fd);font-weight:800;font-size:clamp(11.5px,1vw,14.5px);line-height:1.5;color:var(--inkdark)}
+.jstep p{font-size:clamp(10px,.9vw,12.5px);color:var(--ink3);line-height:1.7;margin-top:4px}
+.jstep::after{content:"";position:absolute;left:-10px;top:50%;width:10px;height:2px;background:var(--line-teal)}
+.jstep:last-child::after{display:none}
+
+/* steps strip */
+.steps{display:flex;align-items:center;justify-content:center;gap:7px;flex-wrap:wrap}
+.step{display:flex;align-items:center;gap:7px;padding:8px 14px;border-radius:999px;
+  background:#fff;border:1px solid var(--line2);font-family:var(--fd);font-weight:700;font-size:clamp(10.5px,.95vw,13.5px);color:var(--inkdark);box-shadow:var(--sh-sm)}
+.step .sn{width:21px;height:21px;border-radius:50%;display:grid;place-items:center;font-size:11px;color:#fff;background:var(--grad)}
+.step.hot{border-color:var(--line-teal);background:rgba(44,120,115,.07)}
+.arrow{color:var(--ink3);display:flex}
+.arrow svg{width:15px;height:15px;transform:scaleX(-1)}
+
+/* matrix */
+.matrix.cols3{grid-template-columns:1.7fr 1fr 1.15fr}
+
+.matrix{display:grid;grid-template-columns:1.4fr 1fr 1fr 1fr 1.15fr;gap:8px}
+.mx-h{font-family:var(--fd);font-weight:800;font-size:clamp(11px,.95vw,14px);padding:11px 9px;text-align:center;color:var(--inkdark);
+  border-radius:var(--r-sm);background:#fff;border:1px solid var(--line2);line-height:1.5}
+.mx-h small{display:block;font-family:var(--fb);font-weight:500;font-size:10px;color:var(--ink3);margin-top:2px}
+.mx-h.us{background:linear-gradient(135deg,rgba(44,120,115,.13),rgba(14,124,134,.08));border-color:var(--line-teal);color:var(--deep)}
+.mx-r{font-family:var(--fd);font-weight:700;font-size:clamp(11px,.94vw,13.5px);display:flex;align-items:center;color:var(--inkdark);
+  padding:9px 11px;border-radius:var(--r-sm);background:var(--card-soft);border:1px solid var(--line)}
+.mx-c{display:grid;place-items:center;padding:7px;border-radius:var(--r-sm);background:var(--card-soft);border:1px solid var(--line);font-size:16px}
+.mx-c.us{background:linear-gradient(135deg,rgba(44,120,115,.10),rgba(14,124,134,.06));border-color:var(--line-teal)}
+.mx-c .v{width:25px;height:25px;border-radius:50%;display:grid;place-items:center;font-weight:800;font-size:12px}
+.mx-c .v.yes{background:rgba(18,150,107,.14);color:var(--good);border:1px solid rgba(18,150,107,.35)}
+.mx-c .v.mid{background:rgba(232,161,60,.13);color:#b0741f;border:1px solid rgba(232,161,60,.35)}
+.mx-c .v.no{background:rgba(209,73,73,.10);color:var(--red);border:1px solid rgba(209,73,73,.3);font-size:11px}
+.legend{display:flex;gap:13px;font-size:11px;color:var(--ink3);align-items:center}
+.legend .v{width:19px;height:19px;border-radius:50%;display:inline-grid;place-items:center;font-size:9px;font-weight:800;vertical-align:middle;margin-inline-end:5px}
+
+/* phases timeline */
+.tl{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}
+.phase{padding:clamp(11px,1.2vw,17px)}
+.phase .ph-top{display:flex;align-items:center;justify-content:space-between;gap:8px}
+.phase .ph-n{font-family:var(--fd);font-weight:900;font-size:12px;color:#fff;background:var(--grad);padding:3px 9px;border-radius:8px}
+.phase .ph-w{font-size:10.5px;color:var(--ink3);font-weight:700;font-family:var(--fd)}
+.phase h4{margin-top:9px;font-size:clamp(13px,1.12vw,16.5px);color:var(--inkdark)}
+.phase ul{list-style:none;margin-top:7px;display:flex;flex-direction:column;gap:5px}
+.phase li{font-size:clamp(10.2px,.93vw,12.8px);color:var(--ink2);line-height:1.7;display:flex;gap:7px}
+.phase li::before{content:"";width:5px;height:5px;border-radius:2px;background:var(--teal);margin-top:8px;flex:0 0 5px}
+
+/* mini steps */
+.ministeps{list-style:none;display:flex;flex-direction:column;gap:8px}
+.ministeps li{display:flex;gap:11px;align-items:flex-start;padding:10px 12px;border-radius:var(--r-sm);background:var(--card-soft);border:1px solid var(--line)}
+.ministeps .mn{width:25px;height:25px;flex:0 0 25px;border-radius:8px;display:grid;place-items:center;font-family:var(--fd);font-weight:800;font-size:12px;color:#fff;background:var(--grad)}
+.ministeps b{font-family:var(--fd);font-size:clamp(11.5px,1vw,14px);color:var(--inkdark)}
+.ministeps span{display:block;font-size:clamp(10px,.92vw,12.8px);color:var(--ink2);line-height:1.7;margin-top:1px}
+
+/* decisions */
+.decisions{display:flex;flex-direction:column;gap:10px}
+.card.dec{display:flex;gap:13px;align-items:center;padding:clamp(12px,1.3vw,18px)}
+.card.dec .dn{width:34px;height:34px;flex:0 0 34px;border-radius:11px;display:grid;place-items:center;font-family:var(--fd);font-weight:900;font-size:16px;color:#fff;background:var(--grad)}
+.card.dec b{font-family:var(--fd);font-weight:800;font-size:clamp(13px,1.15vw,17px);color:var(--inkdark)}
+.card.dec div>span{display:block;font-size:clamp(11px,.98vw,13.5px);color:var(--ink2);line-height:1.8;margin-top:2px}
+
+/* funnel */
+.funnel{display:flex;flex-wrap:wrap;align-items:center;gap:6px}
+.fstep{display:flex;align-items:center;gap:6px;padding:7px 11px;border-radius:10px;font-size:clamp(10px,.93vw,12.6px);font-weight:700;
+  font-family:var(--fd);background:#fff;border:1px solid var(--line2);color:var(--inkdark);box-shadow:var(--sh-sm)}
+.fstep .fi{font-size:9px;opacity:.7}
+.fstep.hot{background:rgba(44,120,115,.10);border-color:var(--line-teal);color:var(--teal)}
+.farr{color:var(--ink3);display:flex}
+.farr svg{width:13px;height:13px;transform:scaleX(-1)}
+
+/* navigation chrome */
+.rail{position:fixed;top:50%;left:14px;transform:translateY(-50%);z-index:40;display:flex;flex-direction:column;gap:9px}
+.rail button{width:11px;height:11px;border-radius:50%;border:1px solid var(--line2);background:#fff;cursor:pointer;transition:all .25s;padding:0}
+.rail button.on{background:var(--teal);border-color:var(--teal);transform:scale(1.35);box-shadow:0 0 0 4px rgba(44,120,115,.15)}
+.nav{position:fixed;bottom:clamp(12px,2.4vh,22px);left:clamp(12px,2vw,26px);z-index:40;display:flex;align-items:center;gap:4px;
+  padding:6px;border-radius:999px;background:rgba(255,255,255,.82);border:1px solid var(--line2);backdrop-filter:blur(16px);box-shadow:var(--sh)}
+.nbtn{display:flex;align-items:center;gap:7px;height:38px;padding:0 13px;border-radius:999px;border:1px solid transparent;background:transparent;color:var(--ink2);
+  font-family:var(--fd);font-weight:700;font-size:12.5px;cursor:pointer;transition:all .25s ease}
+.nbtn svg{width:17px;height:17px}
+.nbtn:hover{background:var(--bg2);color:var(--inkdark);border-color:var(--line)}
+.nbtn.primary{background:var(--grad);border-color:transparent;color:#fff}
+.nbtn.iconic{width:38px;height:38px;padding:0;justify-content:center}
+.nav .sep{width:1px;height:22px;background:var(--line2)}
+.hint{position:fixed;bottom:clamp(12px,2.4vh,22px);right:clamp(12px,2vw,24px);z-index:40;font-size:11px;color:var(--ink3);
+  background:rgba(255,255,255,.9);border:1px solid var(--line2);padding:7px 12px;border-radius:10px;backdrop-filter:blur(12px);transition:opacity .3s;box-shadow:var(--sh-sm)}
+.hint kbd{font-family:ui-monospace,monospace;background:var(--bg2);border:1px solid var(--line2);border-radius:5px;padding:1px 6px;font-size:10px;color:var(--ink2)}
+.hint.hide{opacity:0;pointer-events:none}
+
+/* overview */
+.ov{position:fixed;inset:0;z-index:60;background:rgba(240,248,245,.94);backdrop-filter:blur(22px);
+  -webkit-backdrop-filter:blur(22px);display:none;flex-direction:column;padding:clamp(18px,3vh,34px) clamp(18px,4vw,56px)}
+.ov.open{display:flex}
+.ov-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:16px}
+.ov-head h3{font-family:var(--fd);font-weight:900;font-size:20px;color:var(--inkdark)}
+.ov-head p{color:var(--ink3);font-size:12.5px;margin-top:3px}
+.ov-close{width:42px;height:42px;border-radius:12px;border:1px solid var(--line2);background:#fff;color:var(--ink);cursor:pointer;display:grid;place-items:center;box-shadow:var(--sh-sm)}
+.ov-close svg{width:18px;height:18px}
+.ov-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:14px;overflow:auto;padding-bottom:20px}
+.ov-item{cursor:pointer;outline:none}
+.ov-item .ov-thumb{position:relative;aspect-ratio:16/9;border-radius:13px;overflow:hidden;border:1px solid var(--line2);background:#fff;transition:all .3s ease}
+.ov-item:hover .ov-thumb{transform:translateY(-4px);border-color:var(--line-teal);box-shadow:var(--sh)}
+.ov-item.on .ov-thumb{border-color:var(--teal);box-shadow:0 0 0 2px rgba(44,120,115,.4),var(--sh)}
+.ov-src{position:absolute;top:0;right:0;width:1200px;height:675px;transform-origin:top right;pointer-events:none}
+.ov-src .slide{position:absolute;inset:0;opacity:1;visibility:visible;transform:none;padding:16px 24px 36px}
+.ov-cap{display:flex;align-items:center;gap:9px;margin-top:8px;font-family:var(--fd);font-weight:700;font-size:12.5px;color:var(--ink2)}
+.ov-cap .ov-n{width:23px;height:23px;flex:0 0 23px;border-radius:8px;display:grid;place-items:center;font-size:11px;font-weight:800;background:var(--bg2);border:1px solid var(--line2);color:var(--ink3)}
+.ov-item.on .ov-cap{color:var(--teal)}
+.ov-item.on .ov-n{background:var(--grad);color:#fff;border-color:transparent}
+
+@media (max-width:900px){
+  .g5,.g4{grid-template-columns:repeat(2,1fr)}.g3,.g2{grid-template-columns:1fr}
+  .g21,.g12{grid-template-columns:1fr}.journey{grid-template-columns:repeat(2,1fr)}.jstep::after{display:none}
+  .matrix{grid-template-columns:1.2fr 1fr 1fr 1fr 1.05fr}.tl{grid-template-columns:repeat(2,1fr)}
+  .decisions{grid-template-columns:1fr}.rail{display:none}.hint{display:none}
+}
+@media (max-height:640px) and (min-width:901px){.slide{overflow:auto}}
+@media (prefers-reduced-motion:reduce){*,*::before,*::after{animation:none !important;transition:none !important}.rv{opacity:1;transform:none}}
+
+/* print / PDF A4 landscape */
+
+/* cover */
+.cover{flex:1;display:flex;flex-direction:column;justify-content:center;align-items:center;text-align:center}
+.cover-in{max-width:1180px;width:100%}
+.brandmark{display:flex;align-items:center;gap:16px;margin-bottom:26px;justify-content:center}
+.brandmark .lg{width:60px;height:60px;border-radius:18px;background:var(--grad);display:grid;place-items:center;box-shadow:var(--sh)}
+.brandmark .lg svg{width:36px;height:36px}
+.brandmark .bn b{font-family:var(--fd);font-weight:900;font-size:clamp(22px,2.6vw,34px);color:var(--inkdark);display:block;line-height:1.05}
+.brandmark .bn small{font-family:var(--fd);letter-spacing:.24em;font-weight:700;color:var(--teal);font-size:12px}
+.cover h1{font-family:var(--fd);font-weight:900;font-size:clamp(34px,5.4vw,78px);line-height:1.16;color:var(--inkdark);letter-spacing:-.01em}
+.cover .sub{font-size:clamp(14px,1.5vw,21px);color:var(--ink2);line-height:1.95;margin-top:18px;max-width:900px;margin-inline:auto}
+.cover .rule{width:74px;height:4px;border-radius:3px;background:var(--grad);margin:24px auto}
+.cover-meta{display:flex;flex-wrap:wrap;gap:9px;justify-content:center}
+.cover-note{margin-top:22px;font-size:12.5px;color:var(--ink3);font-family:var(--fd)}
+
+
+.q{font-family:var(--fd);font-weight:800;font-size:clamp(14px,1.4vw,20px);line-height:1.9;color:var(--inkdark)}
+
+@media print{
+  @page{size:A4 landscape;margin:0}
+  html,body{height:auto;overflow:visible;background:#fff}
+  *{print-color-adjust:exact;-webkit-print-color-adjust:exact}
+  .bgfx,.orb,.progress,.rail,.nav,.hint,.ov{display:none !important}
+  .deck{position:static}
+  .slide{position:relative !important;inset:auto !important;display:flex !important;opacity:1 !important;
+    visibility:visible !important;transform:none !important;overflow:hidden;
+    width:297mm;height:208mm;page-break-after:always;break-after:page;
+    padding:11mm 13mm 14mm;background:var(--bg)}
+  .slide:last-child{page-break-after:auto;break-after:auto}
+  .rv{opacity:1 !important;transform:none !important;transition:none !important}
+  .s-foot{bottom:5mm}
+  .card,.banner,.chip,.step,.mcard,.jstep,.phase,.ministeps li,.mx-r,.mx-c,.fstep{box-shadow:none !important}
+}
+</style>
+</head>
+<body>
+
+<!-- shared svg defs -->
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <linearGradient id="lg" x1="0" y1="0" x2="1" y2="1">
+      <stop offset="0" stop-color="#2C7873"/><stop offset=".55" stop-color="#0E7C86"/><stop offset="1" stop-color="#1F6E8C"/>
+    </linearGradient>
+  </defs>
+</svg>
+
+<div class="bgfx" aria-hidden="true"></div>
+<div class="orb o1" aria-hidden="true"></div>
+<div class="orb o2" aria-hidden="true"></div>
+
+<div class="progress" aria-hidden="true"><i id="pbar"></i></div>
+
+<main class="deck" id="deck">
+<!-- ═══ 01 · الغلاف ═══ -->
+<section class="slide is-active" id="s1" data-title="الغلاف">
+  <div class="frame">
+    <div class="cover rv" style="--d:0">
+      <div class="cover-in">
+        <div class="brandmark">
+          <span class="lg"><svg viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="13" fill="url(#lg)"/><path d="M24 13v22M13 24h22" stroke="#fff" stroke-width="6" stroke-linecap="round"/><path d="M12 33h7l3-6 4 9 3-6h8" stroke="#0B3B3A" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round" opacity=".95"/></svg></span>
+          <div class="bn"><small>S I L L A &nbsp;D A W A A I</small><b>صلة دوائي</b></div>
+        </div>
+        <p class="cover-kicker" style="font-family:var(--fd);font-weight:800;font-size:13px;letter-spacing:.14em;color:var(--teal)">الملف الشامل — تجميع كامل لكل الأفكار والخطط والتحليلات من بداية المشروع</p>
+        <h1 class="mt-s">نتحقق <span class="grad-text">قبل أن نوصل</span></h1>
+        <div class="rule"></div>
+        <p class="sub">صلة دوائي ليست تطبيق توصيل — هي <b style="color:var(--teal)">طبقة توثيق وثقة</b> تصل المريض بصيدلية مرخّصة قريبة، بمصدر مضمون، ودفع نقدي عند الاستلام.</p>
+        <div class="cover-meta mt-l">
+          <span class="chip teal"><b>بغداد فقط</b></span>
+          <span class="chip">R1 كرادة + جادرية</span>
+          <span class="chip">R2 منصور + يرموك</span>
+          <span class="chip">R3 زيونة + غدير</span>
+          <span class="chip teal"><b>7500$ · 60 يوم إطلاق</b></span>
+          <span class="chip">6 أشهر خارطة طريق</span>
+          <span class="chip">sillaiq.com</span>
+        </div>
+        <p class="cover-note">31 صفحة تفاعلية · تحليل فريق أحمر + حلول بديلة + اقتصاديات طلب · خط Rawasi بتراجع Tajawal/Cairo</p>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline"><svg viewBox="0 0 48 48" fill="none"><rect x="2" y="2" width="44" height="44" rx="13" fill="url(#lg)"/><path d="M24 13v22M13 24h22" stroke="#fff" stroke-width="6" stroke-linecap="round"/></svg> صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>01</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 02 · المقدمة والمنهجية ═══ -->
+<section class="slide" id="s2" data-title="المقدمة والمنهجية — كيف وصلنا؟">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الجوهر — المنهجية</p>
+      <h2 class="h2">لماذا هذا الملف يحوي <span class="grad-text">الخطتين القديمة والجديدة</span></h2>
+      <p class="lede">تجميع حرفي لكل ما توصلنا إليه من البداية حتى اليوم. لم تُحذف فكرة — بل نُظّمت في تسلسل: مشكلة ← تحليل فريق أحمر ← حلول جديدة ← خطوة غداً صباحاً.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad"><p class="pc-tag">البداية</p><div class="lab" style="margin-top:6px">6 صفحات</div><p>خطة أولية بسيطة ثم <b>30 صفحة واقعية</b> مع صور وتفاصيل ميدانية.</p></div>
+      <div class="card pad glow"><p class="pc-tag" style="color:#d14949">الفريق الأحمر</p><div class="lab" style="margin-top:6px">Red Team</div><p>كشف الثغرات: <b class="hl">تصوير الصيدليات · ERP · COD · الجسور</b>.</p></div>
+      <div class="card pad"><p class="pc-tag">إعادة البناء</p><div class="lab" style="margin-top:6px">منهج جديد</div><p>برومبت يمنع تكرار الحلول القديمة: <b class="hl">إثبات اللقطة · رمز الاستلام · سلسلة التزكية</b>.</p></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card quote-card"><p>الخيط القديم: <span class="hl">هولوغرام + بوت بزرين + مكالمة 20 ثانية</span>.</p></div>
+      <div class="card quote-card glow"><p>الخيط الجديد: <span class="hl">إثبات اللقطة + رمز استلام + ضامن ثانوي + سلسلة تزكية</span>.</p></div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:3">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M9 3h6M10 3v6a3 3 0 0 1-3 3H3m14-6v6a3 3 0 0 0 3 3h3M4 20l6-6M16 12l4 4"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(12.5px,1.15vw,15.5px);line-height:1.9">ضمّ الخطتين معاً أمر حيوي <b style="color:var(--inkdark)">لصاحب القرار</b> ليفهم تطوّر التفكير ولماذا انتقلنا من خطة لأخرى — لا لتكرار أخطاء الماضي.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>02</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 03 · خريطة المحتوى ═══ -->
+<section class="slide" id="s3" data-title="خريطة الرحلة — فهرس 31 صفحة">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">خريطة المحتوى</p>
+      <h2 class="h2">أين أنت الآن؟ <span class="grad-text">فهرس تفاعلي</span></h2>
+      <p class="lede">انقر أي فصل للانتقال المباشر لبدايته. زر <kbd style="background:var(--bg2);border:1px solid var(--line2);padding:1px 6px;border-radius:5px">G</kbd> يستعرض الـ31 صفحة كلها كشبكة.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad hover jump" data-i="1"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">الجوهر والسوق</b><span class="small" style="display:block;margin-top:3px">المنهجية · تعريف التطبيق · سوق العراق وبغداد (2–6)</span></div>
+      <div class="card pad hover jump" data-i="6"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="5" cy="6" r="2.5"/><circle cx="19" cy="7" r="2.5"/><circle cx="9" cy="18" r="2.5"/><circle cx="17" cy="17" r="2.5"/><path d="M7.5 6h9M9 17.5l-4-8M17 15.5l2.5-6"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">العميل</b><span class="small" style="display:block;margin-top:3px">سلوك المريض · الشخصيات الثلاث · الصيدلية B2B (7–9)</span></div>
+      <div class="card pad hover jump" data-i="9"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 17l6-6 4 3 6-8 3 4"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">المنافسة والفرصة</b><span class="small" style="display:block;margin-top:3px">3 مستويات · الفجوات الأربع · النموذج الرباعي (10–12)</span></div>
+      <div class="card pad hover jump" data-i="12"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l2 5 5 .5-4 3.5 1 5-4-2.5L8 17l1-5L5 8.5 10 8z"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">استراتيجية التوثيق</b><span class="small" style="display:block;margin-top:3px">القديمة (هولوغرام) ← الجديدة (3 طبقات) (13–15)</span></div>
+      <div class="card pad hover jump" data-i="15"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="14" rx="2.5"/><path d="M7 8h6M7 12h4M7 16h8"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">الحلول التشغيلية</b><span class="small" style="display:block;margin-top:3px">المخزون الوهمي · COD القديم والجديد (16–19)</span></div>
+      <div class="card pad hover jump" data-i="19"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><circle cx="12" cy="10" r="2.6"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">بغداد التشغيلية</b><span class="small" style="display:block;margin-top:3px">R1 / R2 / R3 · لا أحد يعبر الجسر (20)</span></div>
+      <div class="card pad hover jump" data-i="20"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M3 17l5-6 4 3 6-8 3 4"/><path d="M3 21h18"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">التموضع والتسويق</b><span class="small" style="display:block;margin-top:3px">الرسالة · الهوية · رقمي · واتساب · ميداني (21–25)</span></div>
+      <div class="card pad hover jump" data-i="25"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">المال والاقتصاد</b><span class="small" style="display:block;margin-top:3px">ميزانية 7500$ · المقاييس · نقطة التعادل (26–28)</span></div>
+      <div class="card pad hover jump" data-i="28"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M5 12.5c1-1 2-1.5 3-1s2 1 3 .5 1.5-1.5 3-1 2 .5 3 1.5v5c-1 1-2 1.5-3 1s-2-1-3-.5-1.5 1.5-3 1-2-.5-3-1.5z"/><path d="M5 7.5c1-1 2-1.5 3-1s2 1 3 .5 1.5-1.5 3-1 2 .5 3 1.5"/></svg></div><b style="font-family:var(--fd);color:var(--inkdark)">التنفيذ والغد</b><span class="small" style="display:block;margin-top:3px">الفريق · المخاطر · خطة غداً صباحاً (29–31)</span></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>03</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 04 · تعريف التطبيق: طبقة توثيق لا توصيل ═══ -->
+<section class="slide" id="s4" data-title="تعريف التطبيق — طبقة توثيق لا توصيل">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الجوهر — التعريف</p>
+      <h2 class="h2">المنتج الحقيقي ليس التوصيل… <span class="grad-text">بل طبقة توثيق تتحمّل المسؤولية</span></h2>
+      <p class="lede">التوصيل موجود أصلاً: دراجات وسائقون وتطبيقات أكل. ما لا يقدمه أحد هو مَن يقول بمسؤولية: هذا الدواء صحيح، من مصدر مرخّص، غير مهرب ولا منتهي، ومخزَّن بشكل صحيح.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad glow">
+        <p class="pc-tag">الاسم</p>
+        <h4 class="mt-s">«صلة» — قرابة والتزام مستمر</h4>
+        <p class="mt-s">صلة رحم، ليست «رابطاً تقنياً». يفرّقنا عن أسماء السرعة (فوري، إكسبرس، فلاش) التي تستخدمها تطبيقات التوصيل.</p>
+        <div class="pillrow mt-m"><span class="chip teal">Silla Dawaai</span><span class="chip">sillaiq.com</span><span class="chip">info@sillaiq.com</span></div>
+      </div>
+      <div class="card pad">
+        <p class="pc-tag">الشعاران</p>
+        <h4 class="mt-s">تطوّر الرسالة</h4>
+        <div class="rows mt-m" style="gap:8px">
+          <li><div><b>الأول — يشرح الوظيفة</b><span>«دواؤك… يصلك من صيدلية موثوقة قريبة منك».</span></div></li>
+          <li><div><b>الثاني — يعالج الخوف</b><span>«نتحقق قبل أن نوصل» — يواجه القلق مباشرة.</span></div></li>
+        </div>
+      </div>
+      <div class="card pad">
+        <p class="pc-tag">التمييز القانوني = ميزة</p>
+        <h4 class="mt-s">«نحن وسيط ربط فقط»</h4>
+        <p class="mt-s">لا نبيع ولا نخزن. بالضبط لأننا وسيط محايد، <b class="hl">لا مصلحة لنا في إخفاء معلومة</b> — عكس البائع المجهول على فيسبوك.</p>
+      </div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="4" y="3" width="16" height="18" rx="2.5"/><path d="M8 8h8M8 12h8M8 16h5"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(13px,1.2vw,16px);line-height:1.9"><b style="color:var(--inkdark)">المرحلة الحالية:</b> MVP جاهز تقنياً — رفع وصفة، بحث بالاسم، لوحة صيدلية بسيطة. <span class="hl">لا ERP، لا تتبع لحظي متقدم</span> — وهذا مقصود: صيدلياتنا لا تملك ERP أصلاً.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>04</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 05 · سوق الدواء العراقي ═══ -->
+<section class="slide" id="s5" data-title="سوق الدواء العراقي — 3 مليارات دولار">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الجوهر — السوق</p>
+      <h2 class="h2">3 مليار دولار… <span class="grad-text">وفجوة ثقة لا فجوة تكنولوجيا</span></h2>
+      <p class="lede">الطلب الرقمي مثبَّت: الناس تريد الطلب أونلاين. العرض الموثوق غير موجود — وأي تطبيق جديد بلا طبقة توثيق يكرر خطأ الآخرين.</p>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card mcard"><span class="t">حجم السوق</span><div class="n"><span class="cnum" data-to="3">0</span><span class="suf"> مليار $</span></div><span class="l">سوق الدواء العراقي سنوياً 2024</span></div>
+      <div class="card mcard"><span class="t">مصانع محلية</span><div class="n"><span class="cnum" data-to="40">0</span></div><span class="l">تنتج أكثر من 650 مادة</span></div>
+      <div class="card mcard good"><span class="t">أدوية مزمنة موصوفة</span><div class="n"><span class="cnum" data-to="44.8">0</span><span class="suf">%</span></div><span class="l">من التجزئة: ضغط، سكري، قلب، غدة</span></div>
+      <div class="card mcard warn"><span class="t">باعة غير مرخّصين</span><div class="n"><span class="cnum" data-to="40">0</span><span class="suf"> ألف</span></div><span class="l">على فيسبوك يبيعون بلا ترخيص</span></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card pad">
+        <div class="lab">الملصق الوطني — فرصة لا منافس</div>
+        <p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">وزارة الصحة أطلقت مشروع <b class="hl">الملصق الإلكتروني</b> (1.7 مليون ملصق) لتتبّع المنشأ والسعر والصلاحية. لصلة أن تتكامل معه لا أن تنافسه — <span class="grad-text">فيصبح «متحقق منه» رسمياً</span>.</p>
+      </div>
+      <div class="card pad">
+        <div class="lab">72% يعتمدون على الوصفات</div>
+        <div class="rows mt-m" style="gap:8px">
+          <li><div><b>مزمن / استمرارية</b><span>44.8% — هذا يخلق حاجة للتذكير لا للبحث فقط.</span></div></li>
+          <li><div><b>نمو التطبيقات الصحية</b><span>≈ 19.9% سنوياً — الاتجاه قائم ومركّز.</span></div></li>
+        </div>
+      </div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:3">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M13 2L4.5 13.5H11L9.5 22 19 10h-6.5z"/></svg></span>
+      <p class="q">الفجوة الحقيقية فجوة <span class="grad-text">ثقة</span>، والفائز من يحوّل التوثيق إلى تجربة مرئية لا إلى وعد.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>05</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 06 · سوق بغداد الدقيق ═══ -->
+<section class="slide" id="s6" data-title="سوق بغداد الدقيق — الجسور والصيف والعناوين">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الجوهر — بغداد</p>
+      <h2 class="h2">لماذا بغداد 35%+ … <span class="grad-text">ولماذا تُقسم تشغيلياً</span></h2>
+      <p class="lede">كثافة سكانية ودخل أعلى وانتشار انترنت ومستشفيات تخصصية. لكن بغداد مقسّمة جسرياً وأمنياً — تعقيد لوجستي لا يوجد في أربيل أو البصرة.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad hover"><p class="pc-tag" style="color:#d14949">الجسور</p><h4 class="mt-s">45–90 دقيقة وقت الذروة</h4><p class="mt-s">سائق من الكرادة داخل قد يحتاج 90 دقيقة للمنصور، والجسور تُغلق أحياناً. أي خطة «نغطي بغداد كلها من الشهر الأول» فاشلة.</p></div>
+      <div class="card pad hover"><p class="pc-tag" style="color:#e8a13c">الصيف 50°</p><h4 class="mt-s">حفظ الأدوية الحساسة</h4><p class="mt-s">الأنسولين يحتاج حافظة 2–8°. سائق تطبيق الأكل لا يملكها ولا يعرف أهميتها — <b class="hl">ميزة تنافسية إذا التزمنا بها</b>.</p></div>
+      <div class="card pad hover"><p class="pc-tag">العناوين</p><h4 class="mt-s">«يمّ بيت أبو فلان»</h4><p class="mt-s">كثير من البيوت بلا رقم واضح. الاعتماد على الوصف لا الخرائط — سبب رئيسي لـ No-Show 30%، ويتطلب <b class="hl">تأكيداً بشرياً</b>.</p></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card pad glow">
+        <div class="lab">البنية التحتية للصيدليات</div>
+        <div class="rows mt-m" style="gap:8px">
+          <li><div><b>لا ERP</b><span>جرد دفتر ورقي — لا يمكن طلب تحديث مخزون لحظي.</span></div></li>
+          <li><div><b>كهرباء وانترنت متقطعة</b><span>أي حل يعتمد على لوحة تحكم مستمرة سيفشل.</span></div></li>
+        </div>
+      </div>
+      <div class="card quote-card">
+        <p>الحل: مناطق مغلقة <span class="hl">نصف قطرها 2 كم</span> حول كل صيدلية موثّقة — كثافة، معرفة بالفرع والأزقة، وقلة بنزين وزمن.</p>
+        <p class="qt">مفتاح الربحية، لا مجرد راحة</p>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>06</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 07 · سلوك المريض البغدادي ═══ -->
+<section class="slide" id="s7" data-title="سلوك المريض — خوف لا سعر">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">العميل — السلوك</p>
+      <h2 class="h2">المريض البغدادي لا يبحث عن الأرخص… <span class="grad-text">بل عن الأمان</span></h2>
+      <p class="lede">تجاربه السابقة: ثلاث صيدليات لا ترد، دواء مهرب من صفحة، دفع مقدماً ولم يصل. من هنا تبدأ كل رسالة نكتبها.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad"><div class="lab">لحظة الخوف الليلي</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">أم سارة، الساعة 11 ليلاً، ابنها حرارته 39. لا تريد تطبيقاً — تريد صيدلية <b class="hl">تردّ الآن</b>. هذه اللحظة تحدد الولاء: إن فشلنا فيها خسرنا الحي كاملاً.</p></div>
+      <div class="card pad"><div class="lab">الثقة الاجتماعية</div><div class="rows mt-m" style="gap:8px"><li><div><b>الجار وطبيب العائلة</b><span>أقوى من أي إعلان ممول.</span></div></li><li><div><b>صورة العلبة بتاريخ اليوم</b><span>أقوى من نص «متوفر».</span></div></li><li><div><b>ملصق/رابط تحقق</b><span>تضغطه وتشوف الترخيص — أقوى من شعار.</span></div></li></div></div>
+      <div class="card pad"><div class="lab">الدفع والولاء</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9"><b class="hl">80%+ يفضّلون COD</b> — حماية من النصب لا تخلف. أبو سجاد لا يملك فيزا ولا يريدها، لكن ولاءه <b>×7</b> ولاء شاب يبحث عن خصم إن ضمنّا عدم انقطاع دوائه.</p></div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="5" y="5" width="14" height="10" rx="2"/><path d="M8 15v4h8v-4"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(13px,1.2vw,16px);line-height:1.9"><b style="color:var(--inkdark)">70% من التواصل اليومي في العراق عبر واتساب</b> — قناة الإتمام الأولى، وسنعاملها كقناة ملك (صفحة 24).</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>07</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 08 · شخصيات المشتري الثلاث ═══ -->
+<section class="slide" id="s8" data-title="شخصيات المشتري — أم سارة، أبو سجاد، المهني">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">العميل — الشخصيات</p>
+      <h2 class="h2">ثلاث شخصيات، <span class="grad-text">ثلاث رحلات، ثلاثة عقود ولاء</span></h2>
+      <p class="lede">كل شخصية تشتري وظيفة مختلفة: طمأنينة، استمرارية، أو صفر وقت ضائع.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad hover"><div class="lab">أم سارة · 34 · الكرادة</div><h4 class="mt-s">دافع: الخوف</h4><div class="rows mt-m" style="gap:8px"><li><div><b>الليل 11:00</b><span>حرارة 39 — تكتب اسم الدواء.</span></div></li><li><div><b>4 دقائق</b><span>تصلك صورة العلبة بتاريخ اليوم.</span></div></li><li><div><b>20 دقيقة</b><span>سائق من الكرادة + وصف صوتي.</span></div></li><li><div><b>الرمز ثم النقد</b><span>تطمئن فعلاً بدليل.</span></div></li></div></div>
+      <div class="card pad hover"><div class="lab">أبو سجاد · 58 · الجادرية</div><h4 class="mt-s">دافع: الاستمرارية</h4><div class="rows mt-m" style="gap:8px"><li><div><b>كل 28 يوماً</b><span>Concor · ضغط وسكري.</span></div></li><li><div><b>يوم 25</b><span>تذكير واتساب: «نكمل نفس الطلب؟»</span></div></li><li><div><b>ردّ «إي»</b><span>طلب يتنفذ تلقائياً.</span></div></li><li><div><b>الضامن الثانوي</b><span>لو الرقم مقفل، يتصلون بابنه.</span></div></li></div></div>
+      <div class="card pad hover"><div class="lab">الشاب المهني · 27 · المنصور</div><h4 class="mt-s">دافع: صفر وقت</h4><div class="rows mt-m" style="gap:8px"><li><div><b>بين اجتماعين</b><span>يصور الوصفة ويرفعها.</span></div></li><li><div><b>يواصل شغله</b><span>طلبه يتأكد بالخلفية.</span></div></li><li><div><b>عند الباب</b><span>الرمز + النقد + خلص.</span></div></li></div></div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M4 7a4 4 0 0 1 4-4h0a4 4 0 0 1 4 4"/><rect x="4" y="7" width="16" height="14" rx="3"/><circle cx="9" cy="13" r="1.4"/><circle cx="15" cy="13" r="1.4"/><path d="M9 17h6"/></svg></span>
+      <p class="q">الشخصيات تُختبر بالميدان — لكنها تمنعنا من <span class="grad-text">حملة واحدة للجميع</span>.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>08</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 09 · الصيدلية B2B ═══ -->
+<section class="slide" id="s9" data-title="الصيدلية B2B — الاعتراضات الخمسة">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">العميل — B2B</p>
+      <h2 class="h2">الصيدلية شريك، <span class="grad-text">لا «مورّد»</span></h2>
+      <p class="lede">مستقلة ~100م² في حي سكني، مخزون جيد لكن بلا ظهور. نقطة ألمها: تريد طلبات جديدة بلا ميزانية تسويق، وتخاف من الضرائب والنقابة.</p>
+    </header>
+
+    <div class="grid g21 rv" style="--d:1">
+      <div class="rows">
+        <li><span class="rn">1</span><div><b>«أخاف من الضرائب»</b><span>إحنا وسيط ربط بس، ما نتدخل بمحاسبتك؛ التسوية أسبوعية وواضحة.</span></div></li>
+        <li><span class="rn">2</span><div><b>«أخاف أخالف النقابة»</b><span>اسمك ما يظهر بأي إعلان علني — فقط داخل التطبيق لحظة الطلب.</span></div></li>
+        <li><span class="rn">3</span><div><b>«ما أريد تصوير»</b><span>ما نطلب فيديو إطلاقاً — صورة العلبة وقت التوفر فقط.</span></div></li>
+        <li><span class="rn">4</span><div><b>«ما أدفع اشتراك»</b><span>لا اشتراك — عمولة 8% على المكتمل فقط.</span></div></li>
+        <li><span class="rn">5</span><div><b>«مين يضمن فلوسي؟»</b><span>تسوية كل خميس نقداً أو حوالة + كشف واضح + أول أسبوعين بلا عمولة.</span></div></li>
+      </div>
+      <div class="grid g2" style="gap:12px">
+        <div class="card pad glow"><div class="lab">الوسيط المعروف</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">صيدلي <b class="hl">متقاعد محترم من نفس الحي</b> يقود التجنيد — الصيدلي يثق بزميله أكثر من موظف مبيعات. يرفع القبول من ~30% إلى ~70%.</p></div>
+        <div class="card pad"><div class="lab">القاعدة الذهبية</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">لا نبدأ بـ «شلون نسوّق إلك» — بل <b class="hl">«شلون نضمن ما تخسر شي وأنت تجرّب»</b>. يقرر من الخوف من الخسارة أكثر من الطمع بالربح.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>09</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 10 · المنافسون — 3 مستويات ═══ -->
+<section class="slide" id="s10" data-title="المنافسون — ثلاثة مستويات">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الفرصة — المنافسة</p>
+      <h2 class="h2">ثلاثة مستويات من المنافسة، <span class="grad-text">وكلٌّ يُحارب بأداة مختلفة</span></h2>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad"><p class="pc-tag" style="color:#d14949">المستوى 1 — البيع العشوائي</p><h4 class="mt-s">40 ألف بائع على فيسبوك</h4><p class="mt-s">يبيعون بلا ترخيص، حتى أدوية جدول؛ مخازن تصل 50°، صور مسروقة، وأسماء وهمية تفتح «رقم 2» عند الشكوى. <b class="hl">لا نحاربه بإعلان — نحاربه بالتوثيق.</b></p></div>
+      <div class="card pad"><p class="pc-tag" style="color:#e8a13c">المستوى 2 — توصيل عام</p><h4 class="mt-s">Toters · Careem · Talabat</h4><p class="mt-s">سرعة وأسطول ضخم، لكنها ليست متخصصة طبياً: لا تعرف أن الأنسولين يحتاج 2–8°، لا تتحقق من ترخيص الصيدلية. <b class="hl">المريض يفضّل +10 دقائق من موثّق على 20 من مجهول.</b></p></div>
+      <div class="card pad"><p class="pc-tag" style="color:#0E7C86">المستوى 3 — إقليمية</p><h4 class="mt-s">Vezeeta · Altibbi</h4><p class="mt-s">قوية طبياً لكن بلا COD، وبلا لهجة عراقية، وبلا تغطية أحياء بغداد بدقة 2 كم، وبلا زيارة ميدانية. تركّز على حجز الطبيب لا الدواء. <b class="hl">نحن محلّيون جداً — بغداديون جداً.</b></p></div>
+    </div>
+
+    <div class="card pad glow mt-l rv" style="--d:2">
+      <div class="lab">الخلاصة التنافسية — الخندق الدفاعي</div>
+      <p class="q" style="font-family:var(--fd);font-weight:800;font-size:clamp(15px,1.5vw,21px);line-height:1.9;color:var(--inkdark)">لا أحد يقدّم <span class="grad-text">توفراً فعلياً أولاً</span> ثم مقارنة سعر ومسافة من شبكة موثّقة 100% مع دفع نقدي — لأن التوثيق <b>مكلف ومتعب</b>. هذا بالضبط ما يجعله خندقنا.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>10</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 11 · تحليل الفجوة — 4 فجوات ═══ -->
+<section class="slide" id="s11" data-title="تحليل الفجوة — أربع فجوات">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الفرصة — الفجوات</p>
+      <h2 class="h2">أربع فجوات… <span class="grad-text">وأربعة حلول منفصلة</span></h2>
+      <p class="lede">ليست فجوة واحدة تُحل بشيء واحد — كل فجوة لها حل مستقل.</p>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card pad"><p class="pc-tag">1 · إشارة الثقة</p><h4 class="mt-s" style="margin-top:6px">كلفة التزييف = صفر</h4><p class="mt-s">فتح صفحة مجاني فوري؛ إثبات ترخيص يكلف وقتاً. الخوارزمية تكافئ الأسرع. الحل: <b class="hl">ارفع كلفة التزييف على المزيف</b>.</p></div>
+      <div class="card pad"><p class="pc-tag">2 · الظهور</p><h4 class="mt-s" style="margin-top:6px">صيدلية كاملة بلا ظهور</h4><p class="mt-s">مخزون تمام لكن محد يلقاها على كوكل. الحل: <b class="hl">ارفع ظهور صيدلية موجودة وموثوقة</b> أصلاً، لا تخزّن الدواء عندك.</p></div>
+      <div class="card pad"><p class="pc-tag">3 · الاستمرارية</p><h4 class="mt-s" style="margin-top:6px">44.8% مزمن</h4><p class="mt-s">أبو سجاد يعرف دواءه من 10 سنين — مشكلته ينسى وينقطع. الحل: <b class="hl">تذكير واستمرارية</b> لا بحث.</p></div>
+      <div class="card pad"><p class="pc-tag">4 · العنوان والجدية</p><h4 class="mt-s" style="margin-top:6px">30% No-Show</h4><p class="mt-s">عنوان غلط، رقم مغلق، فضول — لا رفض دفع. الحل: <b class="hl">حل العنوان قبل خروج الطلب</b> لا بعده.</p></div>
+    </div>
+
+    <div class="banner warnb mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(13px,1.2vw,16px);line-height:1.9"><b style="color:var(--inkdark)">درس:</b> أي حل يعالج فجوة واحدة فقط لن يكفي — التوثيق الرقمي، والظهور، والتذكير، والتأكيد البشري يعملون معاً.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>11</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 12 · نموذج العمل الرباعي ═══ -->
+<section class="slide" id="s12" data-title="نموذج العمل الرباعي">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الفرصة — النموذج</p>
+      <h2 class="h2">أربعة أطراف <span class="grad-text">بحلقة واحدة موثّقة</span></h2>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card pad hover"><div class="ico-sq" style="margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><circle cx="9" cy="8.5" r="3"/><path d="M3.5 19c.7-3 3-4.5 5.5-4.5s4.8 1.5 5.5 4.5"/></svg></div><h4>المريض</h4><p class="mt-s">يرفع وصفة أو يبحث</p></div>
+      <div class="card pad hover"><div class="ico-sq" style="margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4" width="18" height="16" rx="3"/><path d="M3 9h18M8 13h3M16 13h2"/></svg></div><h4>الصيدلية الموثّقة</h4><p class="mt-s">استلام + إثبات لقطة + سعر ووقت</p></div>
+      <div class="card pad hover"><div class="ico-sq" style="margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><path d="M3 17l9-9 9 9"/></svg></div><h4>السائق الموثوق</h4><p class="mt-s">نفس الحي + حافظة تبريد + لا يعبر الجسر</p></div>
+      <div class="card pad hover"><div class="ico-sq" style="margin-bottom:8px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round"><rect x="3" y="4" width="18" height="12" rx="2"/><path d="M7 20h10M12 16v4"/></svg></div><h4>الإدارة المركزية</h4><p class="mt-s">زمن أول عرض · قبول · No-Show · احتفاظ</p></div>
+    </div>
+
+    <div class="card pad mt-l rv" style="--d:2">
+      <div class="lab">التدفق — دورة الطلب</div>
+      <div class="steps mt-s">
+        <span class="step"><span class="sn">1</span>يرفع</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="step hot"><span class="sn">2</span>لأقرب 3</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="step"><span class="sn">3</span>صورة + سعر + وقت</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="step"><span class="sn">4</span>يختار</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="step"><span class="sn">5</span>رمز استلام</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="step"><span class="sn">6</span>يستلم</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="step"><span class="sn">7</span>نقد</span><span class="arrow"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M5 12h14M13 6l6 6-6 6"/></svg></span>
+        <span class="step hot"><span class="sn">8</span>تقييم + تسوية</span>
+      </div>
+      <div class="grid g2 mt-l" style="gap:12px">
+        <div class="card pad" style="box-shadow:none"><div class="lab">التسعير</div><p style="color:var(--ink2);font-size:clamp(12px,1.05vw,14.5px);line-height:1.9"><b class="hl">عمولة 8% على المكتمل فقط</b>، لا اشتراك. تسوية كل خميس (زين كاش/حساب). «إذا ما أجبنا الطلب، ما نأخذ شيئاً» — يزيل خوف الصيدلية من الخسارة.</p></div>
+        <div class="card pad" style="box-shadow:none"><div class="lab">لماذا 3 صيدليات فقط؟</div><p style="color:var(--ink2);font-size:clamp(12px,1.05vw,14.5px);line-height:1.9"><b>أكثر من 3</b> = ضغط وتقليل قبول. <b>واحدة فقط</b> = احتكار. <b class="hl">ثلاث = توازن المنافسة والكفاءة</b> داخل نفس R.</p></div>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>12</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 13 · استراتيجية التوثيق القديمة ═══ -->
+<section class="slide" id="s13" data-title="التوثيق القديم — هولوغرام (وتكلفته)">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">استراتيجية التوثيق — القديمة</p>
+      <h2 class="h2">الخطة الأولى: تحقق ثلاثي + <span class="grad-text">ملصق هولوغرام</span></h2>
+      <p class="lede">فكرة تسويقية جميلة… كشفتها المراجعة على أنها مكلفة وقابلة للتقليد ومرفوضة من الصيدليات.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad"><p class="pc-tag">التحقق الثلاثي</p><div class="rows mt-m" style="gap:8px"><li><div><b>1 · ترخيص وزارة الصحة</b><span>ساري المفعول.</span></div></li><li><div><b>2 · هوية الصيدلي المسؤول</b><span>صورة موثقة.</span></div></li><li><div><b>3 · زيارة ميدانية</b><span>10 دقائق + 3 صور للمحل.</span></div></li></div></div>
+      <div class="card pad"><p class="pc-tag">الملصق</p><h4 class="mt-s">هولوغرام أخضر 5سم + QR</h4><p class="mt-s">على باب الصيدلية يفتح صفحة التوثيق — تكلفة ~2$. <b class="hl">مشكلته:</b> 90% من الصيدليات ترفض أي ظهور إعلاني على الواجهة (خوف نقابة/ضرائب)، وهو قابل للتقليد بمطبعة رخيصة.</p></div>
+      <div class="card pad warn"><p class="pc-tag" style="color:#d14949">كتاب النقابة</p><h4 class="mt-s">أساسٌ لا يُتخطى</h4><p class="mt-s">كتاب اطلاع من نقابة صيادلة بغداد (المنصور). بدونه يرفض 80% حتى الحديث. <b class="hl">يُؤخذ أولاً قبل أي زيارة.</b></p></div>
+    </div>
+
+    <div class="banner warnb mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 21s7-5.5 7-11a7 7 0 1 0-14 0c0 5.5 7 11 7 11z"/><path d="M12 8v5M9 11l3-3 3 3"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(13px,1.2vw,16px);line-height:1.9"><b style="color:var(--inkdark)">التكلفة الخفية:</b> توثيق 100 صيدلية = 100 زيارة × ~1 ساعة = <b>12 يوم عمل كامل</b> بفريق موظفتين فقط. غير قابل للتوسع.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>13</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 14 · التوثيق الجديد — 3 طبقات ═══ -->
+<section class="slide" id="s14" data-title="التوثيق الجديد — ثلاث طبقات">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">استراتيجية التوثيق — الجديدة</p>
+      <h2 class="h2">من «ملصق ظاهر» إلى <span class="grad-text">إثبات رقمي مخفي + ثقة اجتماعية</span></h2>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad hover"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><rect x="4" y="4" width="16" height="16" rx="3"/><path d="M12 8.5v7M8.5 12h7"/></svg></div><h4>الطبقة 1 · تحقق رسمي</h4><p class="mt-s">نفس الثلاثي لكن <b class="hl">لعينة أولى 20 صيدلية فقط</b> في R1 (كرادة داخل) كإثبات مفهوم. من ~12 يوم إلى <b>يومين</b>.</p></div>
+      <div class="card pad hover"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><circle cx="12" cy="8" r="3.2"/><path d="M5 20a7 7 0 0 1 14 0"/><circle cx="5" cy="10" r="1.6"/><circle cx="19" cy="10" r="1.6"/></svg></div><h4>الطبقة 2 · سلسلة التزكية</h4><p class="mt-s">كل صيدلية موثّقة ترشّح <b class="hl">صيدليتين تعرفهما وتثق بهما</b>. الصيدلي لا يرشّح سيئاً لأن سمعته على المحك — <b>يقلص كلفة التوثيق 70%</b>.</p></div>
+      <div class="card pad hover"><div class="ico-sq" style="margin-bottom:9px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></div><h4>الطبقة 3 · شهادة رقمية</h4><p class="mt-s">رابط تحقق داخل التطبيق لحظة الطلب فقط: رقم ترخيص (إخفاء جزئي)، تاريخ التوثيق، عدد الطلبات، التقييم. <b class="hl">لا ظهور علني، ولا تقليد</b>.</p></div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 3l2.5 5.5L20 9l-4 4 1 6-5-3-5 3 1-6-4-4 5.5-.5z"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(13px,1.2vw,16px);line-height:1.9">النتيجة: زيارة كاملة لـ <b class="hl">20% فقط</b>، والباقي عبر التزكية + شهادة رقمية تُرى لحظة الطلب — <span class="grad-text">«ترى ترخيصها داخل التطبيق»</span> كما سترويها أم سارة لجارتها.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>14</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 15 · مقارنة القديم والجديد ═══ -->
+<section class="slide" id="s15" data-title="القديم مقابل الجديد — ماذا تغيّر ولماذا">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">استراتيجية التوثيق — المقارنة</p>
+      <h2 class="h2">درس الفريق الأحمر: <span class="grad-text">الإثبات أهم من الإظهار</span></h2>
+      <p class="lede">مقارنة الحلين عبر أكبر محاور التوثيق، ليفهم صاحب القرار منطق الانتقال.</p>
+    </header>
+
+    <div class="matrix cols3 rv" style="--d:1">
+      <div class="mx-h">المحور</div><div class="mx-h">القديم</div><div class="mx-h us">الجديد</div>
+      <div class="mx-r">نوع الدليل</div><div class="mx-c"><span style="font-size:12px">مادي ظاهر (ملصق)</span></div><div class="mx-c us"><span style="font-size:12px">رقمي مخفي + ثقة</span></div>
+      <div class="mx-r">كلفة التوثيق</div><div class="mx-c"><span style="font-size:12px">زيارة لكل صيدلية</span></div><div class="mx-c us"><span style="font-size:12px">20% فقط + تزكية (−70%)</span></div>
+      <div class="mx-r">قابلية التقليد</div><div class="mx-c"><span class="v mid">◐</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+      <div class="mx-r">رضا الصيدلية</div><div class="mx-c"><span class="v no">✗</span></div><div class="mx-c us"><span class="v yes">✓</span></div>
+      <div class="mx-r">إثبات التوفر</div><div class="mx-c"><span class="v no">زر بلا دليل</span></div><div class="mx-c us"><span class="v yes">صورة بتاريخ</span></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card quote-card"><p>القديم يبني إحساساً بالثقة؛ الجديد <span class="hl">يبني الثقة من سلوك موثَّق</span> تتكرر مع كل طلب.</p></div>
+      <div class="card quote-card glow"><p>«أبو أحمد» الوسيط المتقاعد: <span class="grad-text">«أنا انضممت، وهذه تجربتي»</span> — ترفع القبول من 30% إلى 70%.</p></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>15</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 16 · المخزون الوهمي — الحل القديم ═══ -->
+<section class="slide" id="s16" data-title="المخزون الوهمي — الحل القديم (بوت بزرين)">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الحلول — المخزون (قديم)</p>
+      <h2 class="h2">«عندي» بلا دليل… <span class="grad-text">كيف كشفه الفريق الأحمر</span></h2>
+      <p class="lede">المشكلة أصلية: لا ERP والجرد دفتر ورقي. لكن الحل القديم بنى الثقة على زرٍّ فقط — وهو ما لم يصمد.</p>
+    </header>
+
+    <div class="grid g2 rv" style="--d:1">
+      <div class="card pad">
+        <p class="pc-tag">الحل القديم</p>
+        <h4 class="mt-s">بوت واتساب بزرّين</h4>
+        <div class="rows mt-m" style="gap:8px">
+          <li><div><b>[عندي — 4000 — 20د]</b><span>يبدأ عداد 5 دقائق للتجهيز.</span></div></li>
+          <li><div><b>[ما عندي]</b><span>ينتقل الطلب للصيدلية الثانية.</span></div></li>
+          <li><div><b>3 × «ما عندي» متتالية</b><span>توقف الطلبات له ساعة.</span></div></li>
+        </div>
+      </div>
+      <div class="card pad glow warn">
+        <p class="pc-tag" style="color:#d14949">لماذا فشل؟</p>
+        <h4 class="mt-s">زرٌّ بلا إثبات</h4>
+        <p class="mt-s">قد يضغط «عندي» أملاً أن يجده، أو يخطئ السعر. لا دليل بصري. يصل السائق فيكتشف عدم التوفر — <b class="hl">وهذا يحرق الثقة</b> التي نبني عليها كل شيء.</p>
+      </div>
+    </div>
+
+    <div class="banner warnb mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(13px,1.2vw,16px);line-height:1.9"><b style="color:var(--inkdark)">الدرس:</b> وعد «متوفر» بلا برهان يلغي الفارق بيننا وبين البائع الوهمي — لهذا انتقلنا إلى <span class="grad-text">إثبات اللقطة</span>.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>16</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 17 · حل المخزون الجديد: إثبات اللقطة ═══ -->
+<section class="slide" id="s17" data-title="الحل الجديد — إثبات اللقطة">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الحلول — المخزون (جديد)</p>
+      <h2 class="h2">إثبات اللقطة: <span class="grad-text">الدواء «كما ستصله فعلاً»</span></h2>
+      <p class="lede">الصيدلي يصور العلبة الحقيقية وتاريخ اليوم بخط يده على ورقة بجانبها — فيرى المريض العلبة التي ستصله فعلاً، وتُرفع كلفة الكذب.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad glow"><div class="lab">ما الذي يثبته؟</div><ul class="ministeps mt-s"><li><span class="mn">1</span><div><b>توفر فعلي لحظي</b><span>العلبة أمام الكاميرا الآن.</span></div></li><li><span class="mn">2</span><div><b>التاريخ</b><span>تاريخ اليوم بخط اليد.</span></div></li><li><span class="mn">3</span><div><b>السعر</b><span>يُكتب بخط اليد إن لزم.</span></div></li></ul></div>
+      <div class="card pad"><div class="lab">قاعدة الثلاث فرص</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">بعد <b class="hl">3 ادعاءات توفر بلا صورة مطابقة</b> خلال المهلة (5 دقائق) → إيقاف مؤقت 24 ساعة. ترفع كلفة الكذب وترسّخ الصدق.</p></div>
+      <div class="card pad"><div class="lab">التدريب</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9"><b class="hl">20 دقيقة فقط:</b> كيف تصوّر العلبة مع التاريخ، كيف تكتب السعر، كيف ترسل. <b>واتساب عادي + كاميرا</b> — لا لوحة تحكم ولا ERP.</p></div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><rect x="3" y="4" width="18" height="14" rx="2.5"/><circle cx="12" cy="11" r="3.2"/><path d="M8 20h8"/></svg></span>
+      <p class="q">من «ثقة عمياء بزرّ» إلى <span class="grad-text">دليل بصري تطمئن له أم سارة قبل أن تشتري</span>.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>17</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 18 · COD القديم: مكالمة 20 ثانية ═══ -->
+<section class="slide" id="s18" data-title="COD القديم — مكالمة 20 ثانية">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الحلول — COD (قديم)</p>
+      <h2 class="h2">مكالمة 20 ثانية… <span class="grad-text">تبني علاقة لكنها لا تتوسع</span></h2>
+      <p class="lede">حلٌّ جيد أخلاقياً، لكنه لا يصلح وحده كأساس تشغيلي.</p>
+    </header>
+
+    <div class="grid g2 rv" style="--d:1">
+      <div class="card pad">
+        <p class="pc-tag">كيف كان يعمل؟</p>
+        <div class="rows mt-m" style="gap:8px">
+          <li><span class="rn">1</span><div><b>أول طلب لرقم جديد</b><span>مكالمة من موظفة بلهجة بغدادية: «العنوان قرب الأسواق مضبوط؟»</span></div></li>
+          <li><span class="rn">2</span><div><b>بدونها لا يخرج السائق</b><span>ضمان الجدية.</span></div></li>
+          <li><span class="rn">3</span><div><b>الطلب الثاني</b><span>لا حاجة لمكالمة.</span></div></li>
+          <li><span class="rn">4</span><div><b>3 No-Show</b><span>حظر.</span></div></li>
+        </div>
+        <div class="card mcard good mt-m"><span class="t">النتيجة</span><div class="n">30% ← <span class="pre" style="font-size:.6em">أقل من</span> <span class="cnum" data-to="9">0</span><span class="suf">%</span></div><span class="l">نسبة عدم الاستلام</span></div>
+      </div>
+      <div class="card pad glow warn"><div class="lab">العيوب التي قادتنا للجديد</div>
+        <div class="rows mt-s" style="gap:8px">
+          <li><div><b>تستهلك وقت الموظفة</b><span>كل طلب جديد = مكالمة يدوية.</span></div></li>
+          <li><div><b>لا تعمل بعد الدوام</b><span>في الليل بالذات حين تحتاج أم سارة.</span></div></li>
+          <li><div><b>تزعج بعض العملاء</b><span>وخصوصاً الشاب المهني.</span></div></li>
+          <li><div><b>لا تحل العنوان نهائياً</b><span>التأكيد اللفظي لا يضبط الموقع.</span></div></li>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>18</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 19 · حل COD الجديد ═══ -->
+<section class="slide" id="s19" data-title="COD الجديد — رمز الاستلام والضامن الثانوي">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الحلول — COD (جديد)</p>
+      <h2 class="h2">رمز استلام + ضامن ثانوي: <span class="grad-text">نحل السبب قبل خروج الطلب</span></h2>
+      <p class="lede">أربع أدوات تعالج No-Show من جذره، وتُحسّن تجربة العميل بدل مكالمات لكل طلب.</p>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card pad"><div class="lab">رمز الاستلام</div><h4 class="mt-s">4 أرقام</h4><p class="mt-s">يصل للمريض عند التأكيد، ويعطيه للسائق عند التسليم. يضمن وصوله لصاحبه ويمنع ادعاء عدم الاستلام.</p></div>
+      <div class="card pad"><div class="lab">عربون الجدية</div><h4 class="mt-s">~2000 دينار</h4><p class="mt-s">رمزي، يُخصم من القيمة، يُطلب فقط من حالات الخطر العالي (رقم جديد، عنوان بعيد). لا دفع مسبق كامل.</p></div>
+      <div class="card pad"><div class="lab">الضامن الثانوي</div><h4 class="mt-s">رقم احتياطي</h4><p class="mt-s">«لو رقمك ما رد أثناء التوصيل، نكلم مَن؟» — الابن/الجار. يحلّ ~50% من No-Show بدل رجوع السائق فاضي.</p></div>
+      <div class="card pad"><div class="lab">وصف صوتي</div><h4 class="mt-s">10 ثوانٍ</h4><p class="mt-s">«بيتي يمّ جامع فلان، فرع أبو أحمد» — يفهمه سائق الحي أكثر من خرائط جوجل.</p></div>
+    </div>
+
+    <div class="grid g12 mt-l rv" style="--d:2">
+      <div class="card pad glow"><div class="lab">النتيجة المتوقعة</div>
+        <div class="grid g2" style="gap:12px;margin-top:8px">
+          <div class="card mcard good"><span class="t">No-Show</span><div class="n">30% ← <span class="cnum" data-to="12">0</span><span class="suf">%</span></div><span class="l">بدون مكالمات لكل طلب</span></div>
+          <div class="card mcard"><span class="t">جهد يدوي</span><div class="n" style="font-size:.5em">صفر مكالمات</div><span class="l">تجربة أفضل للمريض</span></div>
+        </div>
+      </div>
+      <div class="card quote-card"><p>القديم كان <span class="hl">يؤكّد بعد الطلب</span>؛ الجديد <span class="grad-text">يمنع المشكلة قبلها</span> ببنية تجعل الطلب الجاد هو الذي يصل.</p></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>19</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 20 · تقسيم بغداد التشغيلي ═══ -->
+<section class="slide" id="s20" data-title="بغداد التشغيلية — R1 R2 R3">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">بغداد التشغيلية</p>
+      <h2 class="h2">R1 · R2 · R3 — <span class="grad-text">لا أحد يعبر الجسر</span></h2>
+      <p class="lede">تقسيم لوجستي لا إداري: كل سائق يسكن منطقته ويعرف فرعها وزقاقها. يقلص زمن التوصيل من 90 إلى ~25 دقيقة.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad hover"><p class="pc-tag">R1 · الرصافة</p><h4 class="mt-s">كرادة داخل وخارج</h4><p class="mt-s">كرادة داخل (الحرية→الجادرية) · أبو نؤاس · الجادرية · شارع 62. كثافة عالية وعيادات خاصة — ازدحام شديد يحتاج سائقاً من الكرادة.</p><div class="pillrow mt-m"><span class="chip teal" style="font-size:10.5px">إطلاق أولاً</span><span class="chip" style="font-size:10.5px">دفعة عرض 20 صيدلية</span></div></div>
+      <div class="card pad hover"><p class="pc-tag">R2 · الكرخ</p><h4 class="mt-s">منصور + يرموك</h4><p class="mt-s">منصور (14 رمضان، الأميرات) · يرموك · حي الجامعة. دخل أعلى وسلاسل — دخول بعد إثبات R1.</p><div class="pillrow mt-m"><span class="chip" style="font-size:10.5px">لا يعبر للرصافة</span></div></div>
+      <div class="card pad hover"><p class="pc-tag">R3 · الرصافة</p><h4 class="mt-s">زيونة + الغدير</h4><p class="mt-s">زيونة (الربيع، الضباط) · الغدير · شارع فلسطين. بعيدة عن الكرادة — سائق منفصل لاحقاً.</p><div class="pillrow mt-m"><span class="chip" style="font-size:10.5px">مرحلة متأخرة</span></div></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card pad glow"><div class="lab">نصف قطر 2 كم — لماذا؟</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">سائق يبقى بمنطقته: معرفة، سرعة، بنزين قليل، <b class="hl">وكثافة طلبات عالية</b>. لو وسعنا إلى 5 كم، نفس الطلبات تتوزع فينخفض عددها لكل سائق فنخسر. <b>الكثافة أهم من المساحة.</b></p></div>
+      <div class="card pad"><div class="lab">قيود وقواعد ميدانية</div><div class="rows mt-m" style="gap:8px">
+        <li><div><b>لا توصيل بعد 10 ليلاً للمناطق البعيدة</b><span>قريب جداً فقط.</span></div></li>
+        <li><div><b>حافظة تبريد للأدوية الحساسة</b><span>+ باور بانك لانقطاع الكهرباء.</span></div></li>
+        <li><div><b>التوسع بعد 6 أشهر</b><span>شرط تحقق الأهداف → الحلة/الكوت لا أربيل (لغة وقوانين).</span></div></li>
+      </div></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>20</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 21 · التموضع والرسالة ═══ -->
+<section class="slide" id="s21" data-title="التموضع والرسالة — التطور">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">التموضع — الرسالة</p>
+      <h2 class="h2">من «يصلك» إلى <span class="grad-text">«نتحقق قبل أن نوصل»</span></h2>
+      <p class="lede">«دواؤك يصلك…» صحيح لكنه عام. الجديد يواجه الخوف من البائع المجهول مباشرة — وهو جوهر مشكلة المريض البغدادي.</p>
+    </header>
+
+    <div class="grid g2 rv" style="--d:1">
+      <div class="card pad"><p class="pc-tag" style="color:#0E7C86">التموضع الجديد</p>
+        <div class="rows mt-m" style="gap:8px">
+          <li><div><b>نحن لسنا خدمة توصيل</b><span>نحن الصلة الدائمة بينك وبين صيدلية تعرفها وتثق بها.</span></div></li>
+          <li><div><b>الرسالة الرئيسية</b><span>«نتحقق قبل أن نوصل».</span></div></li>
+        </div>
+      </div>
+      <div class="card pad glow"><p class="pc-tag">لماذا أقوى؟</p>
+        <p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">يحوّل نقطة الضعف القانونية (نحن لا نبيع، بل نربط) إلى <b class="hl">قوة</b>: بالضبط لأننا نتحقق فقط، نحن الطرف المحايد الذي لا مصلحة له في إخفاء معلومة — <b>عكس البائع المجهول</b>.</p>
+      </div>
+    </div>
+
+    <div class="grid g3 mt-l rv" style="--d:2">
+      <div class="card quote-card"><p>لفيسبوك: «دواءك من صيدلية إلها ترخيص ووجه تعرفه — <span class="hl">مو من بيج ما تعرف مصدره»</span>.</p></div>
+      <div class="card quote-card"><p>لأبو سجاد: «دواء الضغط والسكر يوصلك <span class="hl">بيوم موعده… إحنا نذكّرك، مو أنت»</span>.</p></div>
+      <div class="card quote-card"><p>لأم سارة: «الساعة 11 بالليل — <span class="hl">تتأكدين قبل ما تشترين»</span>.</p></div>
+    </div>
+
+    <div class="banner warnb mt-l rv" style="--d:3">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M12 9v4M12 17h.01"/><path d="M10.3 3.9L1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(12.5px,1.15vw,15.5px);line-height:1.9"><b style="color:var(--inkdark)">Compliance by design:</b> ممنوع ذكر دواء بوصفة بأي إعلان · ممنوع مقارنة بصيدلية بالاسم · كل إعلان يمر بقائمة تدقيق (صفحة 30).</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>21</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 22 · الهوية والصوت ═══ -->
+<section class="slide" id="s22" data-title="الهوية والصوت">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">التموضع — الهوية</p>
+      <h2 class="h2">ثقة قبل سرعة، <span class="grad-text">مريض قبل طلب</span></h2>
+    </header>
+
+    <div class="grid g21 rv" style="--d:1">
+      <div class="grid g2" style="gap:12px">
+        <div class="card pad"><p class="pc-tag">القيم</p><ul class="rows mt-m" style="gap:8px"><li><div><b>الثقة قبل السرعة</b><span>أولوية التجربة الآمنة.</span></div></li><li><div><b>المريض قبل الطلب</b><span>سلامته قبل إنجازنا.</span></div></li><li><div><b>التوثيق قبل التوسع</b><span>لا إعلانات قبل اعتماد حقيقي.</span></div></li></ul></div>
+        <div class="card pad"><p class="pc-tag">ما نتجنبه</p><div class="pillrow mt-m"><span class="chip warn" style="font-size:11px;text-decoration:line-through">ثورة</span><span class="chip warn" style="font-size:11px;text-decoration:line-through">الأفضل</span><span class="chip warn" style="font-size:11px;text-decoration:line-through">الأسرع</span></div><p class="mt-s" style="color:var(--ink3);font-size:12px;line-height:1.7">نستبدلها بـ: موثّق، متحقَّق، قريب، تعرفه، تتأكدين.</p></div>
+      </div>
+      <div class="card pad glow"><p class="pc-tag">USP النهائي</p>
+        <p style="font-family:var(--fd);font-weight:800;font-size:clamp(14px,1.35vw,19px);line-height:2;color:var(--inkdark);margin-top:8px">المنصة الوحيدة التي تمنحك <span class="grad-text">مقارنة عروض حقيقية</span> من صيدليات موثّقة 100% — بأولوية للتوفر الفعلي لا للإعلان، مع إثبات لقطة بصري، ورمز استلام، وضامن ثانوي، ودفع نقدي عند الاستلام.</p>
+        <div class="pillrow mt-m"><span class="chip teal">دقة سريرية</span><span class="chip teal">تعاطف إنساني</span></div>
+      </div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card pad"><div class="lab">الرؤية</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">بنية تحتية رقمية تجعل الدواء يصل <b class="hl">لكل بيت في بغداد</b> بثقة وشفافية وكرامة. لسنا أسرع تطبيق — بل <b>أوثق شبكة</b>.</p></div>
+      <div class="card pad"><div class="lab">الهوية البصرية</div>
+        <div class="swatches" style="display:flex;gap:10px;margin-top:8px">
+          <span style="flex:1;height:46px;border-radius:12px;background:#2C7873;border:1px solid #d3e3dd"></span>
+          <span style="flex:1;height:46px;border-radius:12px;background:#0E7C86;border:1px solid #d3e3dd"></span>
+          <span style="flex:1;height:46px;border-radius:12px;background:#EBFAF1;border:1px solid #d3e3dd"></span>
+          <span style="flex:1;height:46px;border-radius:12px;background:#ffffff;border:1px solid #d3e3dd"></span>
+        </div>
+        <div class="pillrow mt-m" style="gap:7px">
+          <span class="chip" style="font-size:10.5px">#2C7873 <b>ثقة</b></span><span class="chip" style="font-size:10.5px">#0E7C86 <b>أمان</b></span><span class="chip" style="font-size:10.5px">#EBFAF1 <b>نظافة</b></span><span class="chip" style="font-size:10.5px">خلفية بيضاء</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>22</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 23 · التسويق الرقمي ═══ -->
+<section class="slide" id="s23" data-title="التسويق الرقمي — فيسبوك/جوجل/تيك توك">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">التسويق — رقمي</p>
+      <h2 class="h2">لا نستهدف بغداد… <span class="grad-text">بل 2 كم حول كل صيدلية موثّقة</span></h2>
+      <p class="lede">كل قناة بدور واضح في رحلة العميل — وحصة في الميزانية.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad hover"><div class="lab">فيسبوك + إنستغرام · 60%</div>
+        <ul class="rows mt-m" style="gap:8px">
+          <li><div><b>رسالة الحي</b><span>«صيدلية الحياة في الكرادة صارت موثّقة — اضغط لتشوف ترخيصها».</span></div></li>
+          <li><div><b>صورة باب حقيقي / إثبات لقطة</b><span>لا صور مسروقة.</span></div></li>
+          <li><div><b>إعادة استهداف</b><span>زار ولم يطلب → تذكير بعد يومين.</span></div></li>
+        </ul></div>
+      <div class="card pad hover"><div class="lab">جوجل بحث · 15%</div>
+        <ul class="rows mt-m" style="gap:8px">
+          <li><div><b>كلمات عالية النية فقط</b><span>«صيدلية توصيل الكرادة»، «صيدلية قريبة مفتوحة الآن».</span></div></li>
+          <li><div><b>كلمات سلبية</b><span>مجاني · رخيص · ليريكا · ترامادول.</span></div></li>
+          <li><div><b>صفحات هبوط لكل حي</b><span>قائمة 10 صيدليات موثّقة + زر «ارفع وصفة».</span></div></li>
+        </ul></div>
+      <div class="card pad hover"><div class="lab">تيك توك · 20% توعية فقط</div>
+        <ul class="rows mt-m" style="gap:8px">
+          <li><div><b>«كيف تعرف الدواء المهرب؟»</b><span>لا بيع، لا أسماء دواء.</span></div></li>
+          <li><div><b>«كيف تحفظ الأنسولين بصيف 50°؟»</b><span>محتوى يُكسب الثقة.</span></div></li>
+          <li><div><b>سناب شات · 5%</b><span>للجنوب لاحقاً فقط.</span></div></li>
+        </ul></div>
+    </div>
+
+    <div class="card pad mt-l rv" style="--d:2"><div class="lab">الإيقاع اليومي (الـ 30 يوماً الأولى)</div>
+      <div class="grid g3 mt-m" style="gap:10px">
+        <div class="card pad" style="box-shadow:none"><b style="font-family:var(--fd);color:var(--teal)">الأيام 1–7 · توعية</b><span class="small" style="display:block">بوستات تثقيف حول أول 10 صيدليات · 10$/يوم · هدف تفاعل.</span></div>
+        <div class="card pad" style="box-shadow:none"><b style="font-family:var(--fd);color:var(--teal)">الأيام 8–15 · موثّقة</b><span class="small" style="display:block">«صارت موثّقة» حول 2كم · 20$/يوم · هدف زيارات موقع.</span></div>
+        <div class="card pad" style="box-shadow:none"><b style="font-family:var(--fd);color:var(--teal)">الأيام 16–30 · طلب مباشر</b><span class="small" style="display:block">«صوّر الوصفة وخلّص» لزار الموقع · 30$/يوم · هدف طلبات.</span></div>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>23</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 24 · واتساب — القناة الملك ═══ -->
+<section class="slide" id="s24" data-title="واتساب — القناة الملك">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">التسويق — واتساب</p>
+      <h2 class="h2">70% فتح مقابل 15% إيميل — <span class="grad-text">هذه قناة العراق الأولى</span></h2>
+      <p class="lede">قناة «الملك» للإتمام والتذكير — تُدار بقواعد صارمة حتى لا نموت بحظر الرقم.</p>
+    </header>
+
+    <div class="grid g2 rv" style="--d:1">
+      <div class="card pad">
+        <div class="lab">الاستخدام</div>
+        <div class="pillrow mt-m" style="gap:8px"><span class="chip teal" style="font-size:11px">تأكيد الطلب</span><span class="chip teal" style="font-size:11px">تتبّع السائق</span><span class="chip teal" style="font-size:11px">تذكير المزمن</span><span class="chip teal" style="font-size:11px">طلب التقييم</span></div>
+        <p class="mt-m small">لا رسائل ترويجية مزعجة — رسائل وظيفية بحتة مرتبطة بطلب أو موافقة.</p>
+      </div>
+      <div class="card pad glow warn"><div class="lab">الحماية من الحظر</div>
+        <div class="rows mt-m" style="gap:8px">
+          <li><div><b>Opt-in صارم</b><span>أول رسالة بعد الطلب: «أوافق على تذكير؟ / لا أوافق».</span></div></li>
+          <li><div><b>لا نرسل بلا موافقة</b><span>وإلا نفقد الرقم لأسابيع = خسارة القناة كلها.</span></div></li>
+        </div>
+      </div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card quote-card"><p>تذكير أبو سجاد: «علاجك اللي طلبته من صيدلية المنصور الموثّقة <span class="hl">قرب يخلص باجر</span>. تحب نكرر نفس الطلب ويوصلك اليوم؟ اكتب: نعم».</p><p class="qt">نعم → طلب تلقائي بنفس إثبات اللقطة ورمز الاستلام</p></div>
+      <div class="card quote-card"><p>رسالة أم سارة: «طلبك من صيدلية الحياة تم تأكيده، صورة العلبة وصلتك، رمز الاستلام 4582، السائق أحمد قربك خلال 20 دقيقة. <span class="hl">إن عندك ملاحظة على العنوان دزي وصف صوتي»</span>.</p></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>24</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 25 · الميدان + المحتوى والإعلانات ═══ -->
+<section class="slide" id="s25" data-title="التسويق الميداني والمحتوى">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">التسويق — ميداني ومحتوى</p>
+      <h2 class="h2">ما يعمل فعلاً في بغداد: <span class="grad-text">وجهاً لوجه</span></h2>
+      <p class="lede">50 زيارة ميدانية تبني ثقة أكثر من 5000 ظهور إعلاني — الصيدلي يثق بمن زاره وشرب الشاي عنده.</p>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card pad"><div class="lab">ستاند QR</div><h4 class="mt-s">3000 دينار</h4><p class="mt-s">قرب كاشير العيادة، يبقى 3 أشهر، كل كود بكود تتبع حي (QR-Karrada-01). «ما لكيت الدواء بالصيدلية الجوة؟»</p></div>
+      <div class="card pad"><div class="lab">تدريب 20 دقيقة</div><h4 class="mt-s">فقط</h4><p class="mt-s">قبول الطلب · إثبات اللقطة · تعديل السعر · التسوية الخميس. أي أطول = رفض.</p></div>
+      <div class="card pad"><div class="lab">جروب الصيادلة</div><h4 class="mt-s">مجتمع الحي</h4><p class="mt-s">مشاركة النواقص («عندي زيادة بانادول») — يراقب لمنع أدوية الجدول.</p></div>
+      <div class="card pad"><div class="lab">ركائز المحتوى</div><h4 class="mt-s">تثقيف أولاً</h4><p class="mt-s">سلامة وحفظ · قصص حقيقية · وراء الكواليس (كيف نوثّق). ترويج ثانياً.</p></div>
+    </div>
+
+    <div class="grid g3 mt-l rv" style="--d:2">
+      <div class="card quote-card"><p>«وياك بالليل مثل ما وياك بالنهار. إذا طفلك حرارته طلعت بنص الليل، صيدلية الحياة موجودة وموثّقة. اطلب واطمن — <span class="hl">دفع نقدي عند الاستلام»</span>.</p></div>
+      <div class="card quote-card"><p>«دواء الضغط والسكر ما يفوتك بعد اليوم. سجّل مرة وحدة <span class="hl">وإحنا نذكّرك</span> — صيدلية المنصور الموثّقة».</p></div>
+      <div class="card quote-card"><p>«صورة الوصفة وخلّص. ما عندك وقت تدور بين الصيدليات؟ أقرب <span class="hl">صيدلية مرخّصة بالمنصور</span> تجهزلك الدواء بدقايق».</p></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>25</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 26 · الميزانية 7500$ ═══ -->
+<section class="slide" id="s26" data-title="الميزانية — 7500$ أول 60 يوم">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">المال — الميزانية</p>
+      <h2 class="h2">7500$ تبنوني ثقةً <span class="grad-text">في حي واحد</span></h2>
+      <p class="lede">كل دولار يجب أن يبني ثقة في حي — إن لم نبنِها في الكرادة، لن نعرف كيف نبنيها في العراق.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card mcard good"><span class="t">فريق ميداني</span><div class="n"><span class="suf">$</span><span class="cnum" data-to="3000">0</span></div><span class="l">موظفتا توثيق (750$/شهر × 2 × شهرين) + سائق 1000$ + بنزين + 100 ستاند QR</span></div>
+      <div class="card mcard"><span class="t">فيسبوك + إنستغرام</span><div class="n"><span class="suf">$</span><span class="cnum" data-to="2500">0</span></div><span class="l">2 كم حول كل صيدلية موثّقة · ~40$/يوم</span></div>
+      <div class="card mcard"><span class="t">جوجل بحث</span><div class="n"><span class="suf">$</span><span class="cnum" data-to="1000">0</span></div><span class="l">كلمات عالية النية فقط</span></div>
+    </div>
+    <div class="card pad mt-m rv" style="--d:2">
+      <div class="lab">آخر 1000$ — بنية تحتية</div>
+      <div class="pillrow" style="gap:8px"><span class="chip" style="font-size:11px">واتساب Business API</span><span class="chip" style="font-size:11px">خادم إثبات اللقطة</span><span class="chip" style="font-size:11px">دومين</span><span class="chip" style="font-size:11px">استضافة</span></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:3">
+      <div class="card pad glow warn"><p class="pc-tag" style="color:#d14949">ما لا ننفق عليه</p><div class="pillrow mt-m" style="gap:8px"><span class="chip" style="font-size:11px">لا بيلبورد</span><span class="chip" style="font-size:11px">لا مشاهير</span><span class="chip" style="font-size:11px">لا مؤثرين</span><span class="chip" style="font-size:11px">لا شعار جديد</span><span class="chip" style="font-size:11px">لا فيديو احترافي</span></div></div>
+      <div class="card pad"><div class="lab">لماذا 60 يوماً فقط؟</div><p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.9">الميزانية تغطي 60 يوماً — بعدها يجب أن تقترب الشبكة من <b class="hl">التعادل</b> (15 طلب/يوم/سائق) ليدفع التشغيل رواتب الفريق من العمولة. إن لم تحقق: <b>أوقف الإعلانات وعد للشارع</b>.</p></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>26</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 27 · المقاييس و Kill Switch ═══ -->
+<section class="slide" id="s27" data-title="مقاييس النجاح و Kill Switch">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">المال — القياس</p>
+      <h2 class="h2">لا نطارد السرعة… <span class="grad-text">بل السلوك الموثَّق</span></h2>
+      <p class="lede">المقاييس الجديدة تقيس صدق الصيدلية ووصول الدواء لصاحبه وربحية الكثافة — لا مجرد سرعة الرد.</p>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card mcard good"><span class="t">إثبات لقطة مطابق</span><div class="n"><span class="cnum" data-to="85">0</span><span class="suf">%</span></div><span class="l">صدق إعلان التوفر</span></div>
+      <div class="card mcard good"><span class="t">رمز استلام صحيح</span><div class="n"><span class="cnum" data-to="90">0</span><span class="suf">%</span></div><span class="l">الوصول للصاحب الصحيح</span></div>
+      <div class="card mcard"><span class="t">كثافة الطلبات</span><div class="n"><span class="cnum" data-to="15">0</span></div><span class="l">طلب/يوم/سائق لكل 2 كم</span></div>
+      <div class="card mcard"><span class="t">نسبة التزكية</span><div class="n"><span class="cnum" data-to="2">0</span></div><span class="l">ترشيحات لكل صيدلية</span></div>
+    </div>
+
+    <div class="card pad mt-l rv" style="--d:2">
+      <div class="lab">Kill Switch · يوم 60</div>
+      <div class="grid g3 mt-m" style="gap:10px">
+        <div class="card pad warn" style="box-shadow:none"><b style="font-family:var(--fd);color:var(--red)">+100 صيدلية فعّالة</b><span class="small" style="display:block">أقل من ذلك = توقف.</span></div>
+        <div class="card pad warn" style="box-shadow:none"><b style="font-family:var(--fd);color:var(--red)">+500 طلب مكتمل نقداً</b><span class="small" style="display:block">أقل = توقف.</span></div>
+        <div class="card pad warn" style="box-shadow:none"><b style="font-family:var(--fd);color:var(--red)">No-Show ≤ 20%</b><span class="small" style="display:block">فوقها رغم الرمز والضامن = أعد النظر.</span></div>
+      </div>
+      <div class="banner warnb mt-l" style="padding:12px 16px">
+        <span class="b-ico" style="width:34px;height:34px;flex-basis:34px;border-radius:10px"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M6 19a2 2 0 1 1-2-2 2 2 0 0 1 2 2zm10 0a2 2 0 1 1-2-2 2 2 0 0 1 2 2zM3 8h3l2-3h6l2 3h3"/><path d="M4 10h16l-1 7H5z"/></svg></span>
+        <p style="color:var(--ink2);font-size:clamp(12px,1.1vw,15px);line-height:1.8"><b style="color:var(--inkdark)">قاعدة:</b> لا نحرق فلوساً إضافية على إعلانات لمنتج غير جاهز — التوقف ليس فشلاً بل انضباطاً.</p>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>27</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 28 · اقتصاديات الطلب ═══ -->
+<section class="slide" id="s28" data-title="اقتصاديات الطلب ونقطة التعادل">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">المال — الاقتصاد</p>
+      <h2 class="h2">نقطة التعادل: <span class="grad-text">15 طلباً يومياً لكل سائق</span></h2>
+      <p class="lede">متوسط الطلب 20,000 د.ع · عمولة 8% = 1,600 د.ع · كلفة وقود وصيانة ~300 د.ع للطلب.</p>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad"><div class="lab">8 طلبات/يوم</div><div class="mcard" style="box-shadow:none;padding:4px 0"><span class="t">كلفة سائق للطلب</span><div class="n" style="background:none;-webkit-background-clip:border-box;color:#d14949">−1200</div></div><p class="small">كلفة 2800 (2500 سائق + 300) > إيراد 1600 → خسارة.</p></div>
+      <div class="card pad glow"><div class="lab">15 طلبات/يوم · التعادل</div><div class="mcard" style="box-shadow:none;padding:4px 0"><span class="t">كلفة للطلب</span><div class="n" style="background:none;-webkit-background-clip:border-box;color:#12966b">≈0</div></div><p class="small">كلفة ~1633 ≈ إيراد 1600 — تعادل تقريباً دون احتساب رواتب التوثيق.</p></div>
+      <div class="card pad good"><div class="lab">25 طلباً/يوم</div><div class="mcard" style="box-shadow:none;padding:4px 0"><span class="t">كلفة للطلب</span><div class="n" style="background:none;-webkit-background-clip:border-box;color:#12966b">+500</div></div><p class="small">كلفة ~1100 < إيراد 1600 → ربح هامشي صافٍ.</p></div>
+    </div>
+
+    <div class="banner mt-l rv" style="--d:2">
+      <span class="b-ico"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.9" stroke-linecap="round"><path d="M3 3v18h18"/><path d="M7 15l4-6 3 3 5-8"/></svg></span>
+      <p style="color:var(--ink2);font-size:clamp(13px,1.2vw,16px);line-height:1.9"><b style="color:var(--inkdark)">الاستنتاج الاستراتيجي:</b> بأقل من 15 طلباً/يوم، العمولة وحدها بالكاد تغطي كلفة التوصيل. هذا يفسّر <span class="hl">التركيز الجغرافي الصارم</span> — أي سائق إضافي يرتبط بإثبات كثافة طلبات فعلي أولاً، لا بخطة نمو افتراضية.</p>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>28</b> <i>/ 31</i></span></footer>
+</section>
+<!-- ═══ 29 · الفريق والعمليات اليومية ═══ -->
+<section class="slide" id="s29" data-title="الفريق والعمليات اليومية">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">التنفيذ — الفريق</p>
+      <h2 class="h2">فريق صغير… <span class="grad-text">بعمليات منضبطة يومياً</span></h2>
+    </header>
+
+    <div class="grid g4 rv" style="--d:1">
+      <div class="card pad"><div class="lab">توثيق 1</div><h4 class="mt-s" style="margin-top:6px">R1 · كرادة</h4><span class="small">60 صيدلية مستهدفة.</span></div>
+      <div class="card pad"><div class="lab">توثيق 2</div><h4 class="mt-s" style="margin-top:6px">R2 + R3</h4><span class="small">منصور/يرموك + زيونة/غدير.</span></div>
+      <div class="card pad"><div class="lab">سائق</div><h4 class="mt-s" style="margin-top:6px">من الكرادة</h4><span class="small">حافظة تبريد + باور بانك.</span></div>
+      <div class="card pad"><div class="lab">المدير</div><h4 class="mt-s" style="margin-top:6px">مراجعة KPIs</h4><span class="small">يومياً 4:00 عصراً.</span></div>
+    </div>
+
+    <div class="grid g2 mt-l rv" style="--d:2">
+      <div class="card pad"><div class="lab">روتين اليوم</div><div class="rows mt-m" style="gap:8px">
+        <li><span class="rn">9a</span><div><b>مراجعة طلبات الأمس</b><span>إثبات اللقطة · No-Show.</span></div></li>
+        <li><span class="rn">11a</span><div><b>زيارات توثيق جديدة</b><span>ميدانية.</span></div></li>
+        <li><span class="rn">2p</span><div><b>تدريب صيدليات</b><span>20 دقيقة.</span></div></li>
+        <li><span class="rn">4p</span><div><b>مراجعة الكثافة</b><span>لكل 2 كم.</span></div></li>
+        <li><span class="rn">6p</span><div><b>تسوية الخميس</b><span>للصيدليات.</span></div></li>
+      </div></div>
+      <div class="card pad"><div class="lab">النتيجة في حياة كل شخصية</div><div class="rows mt-m" style="gap:8px">
+        <li><div><b>أم سارة</b><span>طمأنينة ليلية بدليل خلال 4 دقائق ورمز استلام.</span></div></li>
+        <li><div><b>أبو سجاد</b><span>يوم 28 دورة، تذكير + تنفيذ تلقائي + ضامن — الانقطاع شبه مستحيل.</span></div></li>
+        <li><div><b>الشاب المهني</b><span>صفر وقت ضائع بين اجتماعين.</span></div></li>
+      </div></div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>29</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 30 · المخاطر والامتثال ═══ -->
+<section class="slide" id="s30" data-title="المخاطر والامتثال القانوني">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">التنفيذ — المخاطر</p>
+      <h2 class="h2">مخاطر نعرفها اليوم… <span class="grad-text">بضوابط مكتوبة مسبقاً</span></h2>
+    </header>
+
+    <div class="grid g2 rv" style="--d:1">
+      <div class="rows">
+        <li><span class="rn">1</span><div><b>صيدلية تبيع منتهي/مهرب عبرنا</b><span>إثبات اللقطة يكشف التاريخ + 3 بلاغات = إيقاف فوري + الشهادة تظهر البلاغات.</span></div></li>
+        <li><span class="rn">2</span><div><b>حظر واتساب للأعمال</b><span>Opt-in صارم، لا رسائل ترويجية بلا موافقة.</span></div></li>
+        <li><span class="rn">3</span><div><b>No-Show رغم الرمز</b><span>عربون جدية + ضامن ثانوي + وصف صوتي.</span></div></li>
+        <li><span class="rn">4</span><div><b>جسور مغلقة / انقطاع</b><span>مناطق مغلقة لا تعبر الجسر + باور بانك + شريحتان (زين وآسياسيل).</span></div></li>
+        <li><span class="rn">5</span><div><b>اعتراض النقابة</b><span>كتاب اطلاع أولاً قبل أي إعلان.</span></div></li>
+      </div>
+      <div class="card pad glow warn"><div class="lab">الامتثال القانوني — تطبيق عملي</div>
+        <ul class="ministeps mt-m" style="gap:7px">
+          <li><span class="mn">!</span><div><b>لا أدوية جدول أونلاين أبداً</b></div></li>
+          <li><span class="mn">!</span><div><b>لا اسم دواء بوصفة بإعلان</b><span>حتى بالإيحاء («بديل» ممنوع).</span></div></li>
+          <li><span class="mn">!</span><div><b>كتاب اطلاع من نقابة بغداد</b></div></li>
+          <li><span class="mn">!</span><div><b>وصفات تُشفَّر وتُحذف بعد 24 ساعة</b></div></li>
+          <li><span class="mn">!</span><div><b>توافق مع الملصق الوطني 1.7M</b></div></li>
+        </ul>
+      </div>
+    </div>
+
+    <div class="card pad mt-l rv" style="--d:2">
+      <div class="lab">قائمة تدقيق الإعلانات (صفحة واحدة)</div>
+      <div class="grid g3 mt-m" style="gap:8px;font-size:12.5px;color:var(--ink2);line-height:1.8">
+        <span>1 · اسم دواء بوصفة؟ → ممنوع</span><span>2 · مقارنة بصيدلية بالاسم؟ → ممنوع</span><span>3 · «موثّقة/مرخّصة»؟ → يجب</span>
+        <span>4 · «دفع نقدي عند الاستلام»؟ → يجب</span><span>5 · صورة شخص بلا إذن؟ → ممنوع</span><span>6 · رسالة فيها Opt-in؟ → يجب</span>
+      </div>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>30</b> <i>/ 31</i></span></footer>
+</section>
+
+<!-- ═══ 31 · ماذا نفعل غداً + الخلاصة ═══ -->
+<section class="slide" id="s31" data-title="الغد والخلاصة — ابدأ الآن">
+  <div class="frame">
+    <header class="s-head rv" style="--d:0">
+      <p class="num-tag">الخلاصة — خطة 24 ساعة</p>
+      <h2 class="h2">غداً صباحاً: <span class="grad-text">خطة 24 ساعة</span></h2>
+    </header>
+
+    <div class="grid g3 rv" style="--d:1">
+      <div class="card pad"><div class="lab">9:00 صباحاً</div><h4 class="mt-s" style="font-size:15px">نقابة صيادلة بغداد</h4><p class="mt-s small">طلب كتاب اطلاع (15 دقيقة) — أحضر السجل التجاري واشرح: «إحنا وسيط ربط فقط».</p></div>
+      <div class="card pad"><div class="lab">11:00 صباحاً</div><h4 class="mt-s" style="font-size:15px">اختيار 20 صيدلية R1</h4><p class="mt-s small">اتصال عبر الوسيط المعروف (صيدلي متقاعد).</p></div>
+      <div class="card pad"><div class="lab">2:00 ظهراً</div><h4 class="mt-s" style="font-size:15px">زيارة أول 5</h4><p class="mt-s small">توثيق ثلاثي + تدريب 20 دقيقة على إثبات اللقطة.</p></div>
+      <div class="card pad"><div class="lab">4:00 عصراً</div><h4 class="mt-s" style="font-size:15px">مراجعة KPIs</h4><p class="mt-s small">اليوم الأول على اللوحة.</p></div>
+      <div class="card pad"><div class="lab">6:00 مساءً</div><h4 class="mt-s" style="font-size:15px">أول طلب تجريبي داخلي</h4><p class="mt-s small">بين أعضاء الفريق.</p></div>
+    </div>
+
+    <div class="card pad glow mt-l rv" style="--d:2">
+      <div class="lab">الخلاصة النهائية — ثلاث جمل</div>
+      <p style="font-family:var(--fd);font-weight:800;font-size:clamp(14px,1.4vw,20px);line-height:2.1;color:var(--inkdark)">صلة دوائي في بغداد لا تحتاج أن تكون <span class="hl">أسرع تطبيق</span> — بل <span class="grad-text">أوثق شبكة</span>. أول عميل حقيقي يأتي عندما تقول أم سارة لجارتها: «دزي الوصفة لصلة، صيدلية الحياة اللي شفت ترخيصها داخل التطبيق» — وهذا تسويقٌ لا يُشترى بفلوس. <b>الخطوة الأولى ليست إعلاناً ممولاً، بل زيارة ميدانية لصيدلية في الكرادة وإقناعها بالتجربة بلا مخاطرة.</b></p>
+    </div>
+
+    <div class="cover-meta mt-l rv" style="--d:3">
+      <span class="chip teal"><b>31 صفحة</b></span><span class="chip">بغداد فقط</span><span class="chip">7500$ · 60 يوم</span><span class="chip">sillaiq.com</span>
+    </div>
+  </div>
+  <footer class="s-foot"><span class="brandline">صلة دوائي · SILLA DAWAAI</span><span class="pageno"><b>31</b> <i>/ 31</i></span></footer>
+</section>
+</main>
+
+<!-- chrome -->
+<nav class="rail" id="rail" aria-label="صفحات العرض"></nav>
+
+<div class="nav" role="toolbar" aria-label="التنقل">
+  <button class="nbtn" id="btnOverview" title="نظرة عامة (G)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><rect x="4" y="4" width="7" height="7" rx="1.5"/><rect x="13" y="4" width="7" height="7" rx="1.5"/><rect x="4" y="13" width="7" height="7" rx="1.5"/><rect x="13" y="13" width="7" height="7" rx="1.5"/></svg><span>النظرة</span></button>
+  <span class="sep"></span>
+  <button class="nbtn" id="btnPrev" title="السابق (→)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M9 6l6 6-6 6"/></svg><span>السابق</span></button>
+  <button class="nbtn primary" id="btnNext" title="التالي (←)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.4" stroke-linecap="round"><path d="M15 6l-6 6 6 6"/></svg><span>التالي</span></button>
+  <span class="sep"></span>
+  <button class="nbtn iconic" id="btnFull" title="ملء الشاشة (F)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M9 4H4v5M15 4h5v5M9 20H4v-5M15 20h5v-5"/></svg></button>
+  <button class="nbtn iconic" id="btnPrint" title="طباعة / PDF (P)"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M7 8V4h10v4M7 16H4a1 1 0 0 1-1-1v-5a1 1 0 0 1 1-1h16a1 1 0 0 1 1 1v5a1 1 0 0 1-1 1h-3"/><rect x="7" y="14" width="10" height="6" rx="1"/></svg></button>
+</div>
+
+<div class="hint" id="hint"><kbd>←</kbd> التالي &nbsp; <kbd>→</kbd> السابق &nbsp; <kbd>G</kbd> نظرة عامة &nbsp; <kbd>F</kbd> ملء الشاشة &nbsp; <kbd>P</kbd> طباعة/PDF &nbsp; <kbd>H</kbd> إخفاء</div>
+
+<div class="ov" id="ov" role="dialog" aria-modal="true" aria-label="نظرة عامة على الصفحات">
+  <div class="ov-head">
+    <div><h3>نظرة عامة — 31 صفحة</h3><p>انقر أي صفحة للانتقال إليها · Esc للإغلاق</p></div>
+    <button class="ov-close" id="ovClose" aria-label="إغلاق"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg></button>
+  </div>
+  <div class="ov-grid" id="ovGrid"></div>
+</div>
+
+<script>
+(function(){
+  'use strict';
+  var slides = Array.prototype.slice.call(document.querySelectorAll('.slide'));
+  var total = slides.length;
+  var idx = 0;
+  var pbar = document.getElementById('pbar');
+  var rail = document.getElementById('rail');
+  var ov = document.getElementById('ov');
+  var ovGrid = document.getElementById('ovGrid');
+  var hint = document.getElementById('hint');
+
+  slides.forEach(function(s, i){
+    var b = document.createElement('button');
+    b.setAttribute('aria-label', (i+1) + '. ' + (s.dataset.title || ''));
+    b.addEventListener('click', function(){ goTo(i); });
+    rail.appendChild(b);
+  });
+  var dots = Array.prototype.slice.call(rail.children);
+
+  function fmt(n){ return Math.round(n).toLocaleString('en-US'); }
+  function runCounters(sl){
+    sl.querySelectorAll('.cnum').forEach(function(el){
+      var to = parseFloat(el.dataset.to || '0');
+      var t0 = null, dur = 1000;
+      el.textContent = '0';
+      function tick(ts){
+        if(!t0) t0 = ts;
+        var p = Math.min(1, (ts - t0) / dur);
+        var e = 1 - Math.pow(1 - p, 3);
+        el.textContent = fmt(to * e);
+        if(p < 1) requestAnimationFrame(tick); else el.textContent = fmt(to);
+      }
+      requestAnimationFrame(tick);
+    });
+  }
+
+  function goTo(i){
+    i = Math.max(0, Math.min(total - 1, i));
+    var changed = i !== idx;
+    idx = i;
+    slides.forEach(function(s, k){ s.classList.toggle('is-active', k === idx); });
+    dots.forEach(function(d, k){ d.classList.toggle('on', k === idx); });
+    pbar.style.width = ((idx + 1) / total * 100) + '%';
+    if(changed){
+      try { history.replaceState(null, '', '#s' + (idx + 1)); } catch(e){}
+      document.title = (slides[idx].dataset.title || '') + ' — صلة دوائي · Silla Dawaai';
+      runCounters(slides[idx]);
+      if(ov.classList.contains('open')) markOv();
+    }
+  }
+  function next(){ goTo(idx + 1); }
+  function prev(){ goTo(idx - 1); }
+
+  /* map jump cards */
+  document.querySelectorAll('.jump[data-i]').forEach(function(el){
+    el.addEventListener('click', function(){ closeOv(); goTo(parseInt(el.getAttribute('data-i'),10)); });
+  });
+
+  function buildOv(){
+    ovGrid.innerHTML = '';
+    slides.forEach(function(s, i){
+      var item = document.createElement('div');
+      item.className = 'ov-item' + (i === idx ? ' on' : '');
+      item.tabIndex = 0;
+      var thumb = document.createElement('div'); thumb.className = 'ov-thumb';
+      var clone = s.cloneNode(true); clone.classList.add('is-active'); clone.removeAttribute('id');
+      var wrap = document.createElement('div'); wrap.className = 'ov-src'; wrap.appendChild(clone);
+      thumb.appendChild(wrap);
+      var cap = document.createElement('div'); cap.className = 'ov-cap';
+      cap.innerHTML = '<span class="ov-n">' + String(i + 1).padStart(2, '0') + '</span><span>' + (s.dataset.title || '') + '</span>';
+      item.appendChild(thumb); item.appendChild(cap);
+      function open(){ closeOv(); goTo(i); }
+      item.addEventListener('click', open);
+      item.addEventListener('keydown', function(e){ if(e.key === 'Enter' || e.key === ' '){ e.preventDefault(); open(); } });
+      ovGrid.appendChild(item);
+    });
+    fitOv();
+  }
+  function fitOv(){
+    ovGrid.querySelectorAll('.ov-src').forEach(function(src){
+      var w = src.parentElement.clientWidth;
+      src.style.transform = 'scale(' + (w / 1200) + ')';
+      src.parentElement.style.height = (675 * (w / 1200)) + 'px';
+    });
+  }
+  function markOv(){ ovGrid.querySelectorAll('.ov-item').forEach(function(it, i){ it.classList.toggle('on', i === idx); }); }
+  function openOv(){ buildOv(); ov.classList.add('open'); }
+  function closeOv(){ ov.classList.remove('open'); }
+
+  document.getElementById('btnNext').addEventListener('click', next);
+  document.getElementById('btnPrev').addEventListener('click', prev);
+  document.getElementById('btnOverview').addEventListener('click', function(){ ov.classList.contains('open') ? closeOv() : openOv(); });
+  document.getElementById('ovClose').addEventListener('click', closeOv);
+  ov.addEventListener('click', function(e){ if(e.target === ov) closeOv(); });
+  document.getElementById('btnFull').addEventListener('click', function(){
+    if(!document.fullscreenElement) document.documentElement.requestFullscreen && document.documentElement.requestFullscreen();
+    else document.exitFullscreen && document.exitFullscreen();
+  });
+  document.getElementById('btnPrint').addEventListener('click', function(){ window.print(); });
+
+  document.addEventListener('keydown', function(e){
+    if(e.key === 'F12' || (e.ctrlKey || e.metaKey)) return;
+    switch(e.key){
+      case 'ArrowLeft': case ' ': case 'PageDown': case 'Enter':
+        if(document.activeElement && /BUTTON|INPUT|TEXTAREA/.test(document.activeElement.tagName)) return;
+        e.preventDefault(); next(); break;
+      case 'ArrowRight': case 'PageUp': case 'Backspace': e.preventDefault(); prev(); break;
+      case 'ArrowDown': e.preventDefault(); next(); break;
+      case 'ArrowUp': e.preventDefault(); prev(); break;
+      case 'Home': e.preventDefault(); goTo(0); break;
+      case 'End': e.preventDefault(); goTo(total - 1); break;
+      case 'f': case 'F': document.getElementById('btnFull').click(); break;
+      case 'g': case 'G': ov.classList.contains('open') ? closeOv() : openOv(); break;
+      case 'p': case 'P': window.print(); break;
+      case 'h': case 'H': hint.classList.toggle('hide'); break;
+      case 'Escape': closeOv(); break;
+      default:
+        if(/^[0-9]$/.test(e.key)){
+          var n = e.key === '0' ? 10 : parseInt(e.key, 10);
+          if(n <= total) goTo(n - 1);
+        }
+    }
+  });
+
+  var tx = null;
+  document.addEventListener('touchstart', function(e){ tx = e.touches[0].clientX; }, {passive:true});
+  document.addEventListener('touchend', function(e){
+    if(tx === null) return;
+    var dx = e.changedTouches[0].clientX - tx;
+    if(Math.abs(dx) > 55){ dx < 0 ? next() : prev(); }
+    tx = null;
+  }, {passive:true});
+
+  window.addEventListener('resize', function(){ if(ov.classList.contains('open')) fitOv(); });
+
+  var m = (location.hash || '').match(/s(\d+)/);
+  if(m) idx = Math.max(0, Math.min(total - 1, parseInt(m[1], 10) - 1));
+  goTo(idx);
+})();
+</script>
+</body>
+</html>
